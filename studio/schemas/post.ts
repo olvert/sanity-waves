@@ -6,7 +6,12 @@ export default {
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
+    },
+    {
+      name: 'hideTitle',
+      title: 'Hide title',
+      type: 'boolean',
     },
     {
       name: 'slug',
@@ -14,41 +19,27 @@ export default {
       type: 'slug',
       options: {
         source: 'title',
-        maxLength: 96
-      }
+      },
     },
     {
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'}
-    },
-    {
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true
-      }
-    },
-    {
-      name: 'categories',
-      title: 'Categories',
+      name: 'tags',
+      title: 'Tags',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}]
+      of: [{ type: 'reference', to: { type: 'tag' } }],
     },
     {
       name: 'publishedAt',
       title: 'Published at',
-      type: 'datetime'
+      type: 'datetime',
     },
     {
       name: 'body',
       title: 'Body',
-      type: 'blockContent'
-    }
+      type: 'postContent',
+    },
   ],
 
+  /*
   preview: {
     select: {
       title: 'title',
@@ -62,4 +53,5 @@ export default {
       })
     }
   }
-}
+  */
+};

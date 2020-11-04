@@ -1,0 +1,33 @@
+query postsByPagination($limit: Int!, $offset: Int!) {
+  allPost(limit: $limit, offset: $offset) {
+    title,
+    slug {
+      current
+    },
+    body {
+      ... on Image {
+        _key,
+        asset {
+          url,
+          metadata {
+            dimensions {
+              height,
+              width,
+            }
+          }
+        }
+      }
+      ... on Video {
+        _key,
+        videoId,
+        isVimeo
+      }
+    },
+    tags {
+      title,
+      slug {
+        current
+      }
+    }
+  }
+}

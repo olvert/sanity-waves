@@ -795,6 +795,48 @@ export type PostBySlugQuery = (
   )> }
 );
 
+export type PostsByPaginationQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
+}>;
+
+
+export type PostsByPaginationQuery = (
+  { __typename?: 'RootQuery' }
+  & { allPost: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'title'>
+    & { slug?: Maybe<(
+      { __typename?: 'Slug' }
+      & Pick<Slug, 'current'>
+    )>, body?: Maybe<Array<Maybe<(
+      { __typename?: 'Image' }
+      & Pick<Image, '_key'>
+      & { asset?: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url'>
+        & { metadata?: Maybe<(
+          { __typename?: 'SanityImageMetadata' }
+          & { dimensions?: Maybe<(
+            { __typename?: 'SanityImageDimensions' }
+            & Pick<SanityImageDimensions, 'height' | 'width'>
+          )> }
+        )> }
+      )> }
+    ) | (
+      { __typename?: 'Video' }
+      & Pick<Video, '_key' | 'videoId' | 'isVimeo'>
+    )>>>, tags?: Maybe<Array<Maybe<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'title'>
+      & { slug?: Maybe<(
+        { __typename?: 'Slug' }
+        & Pick<Slug, 'current'>
+      )> }
+    )>>> }
+  )> }
+);
+
 
 export const PostBySlugDocument = gql`
     query postBySlug($slug: String!) {
@@ -835,6 +877,68 @@ export function usePostBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type PostBySlugQueryHookResult = ReturnType<typeof usePostBySlugQuery>;
 export type PostBySlugLazyQueryHookResult = ReturnType<typeof usePostBySlugLazyQuery>;
 export type PostBySlugQueryResult = Apollo.QueryResult<PostBySlugQuery, PostBySlugQueryVariables>;
+export const PostsByPaginationDocument = gql`
+    query postsByPagination($limit: Int!, $offset: Int!) {
+  allPost(limit: $limit, offset: $offset) {
+    title
+    slug {
+      current
+    }
+    body {
+      ... on Image {
+        _key
+        asset {
+          url
+          metadata {
+            dimensions {
+              height
+              width
+            }
+          }
+        }
+      }
+      ... on Video {
+        _key
+        videoId
+        isVimeo
+      }
+    }
+    tags {
+      title
+      slug {
+        current
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePostsByPaginationQuery__
+ *
+ * To run a query within a React component, call `usePostsByPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsByPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsByPaginationQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function usePostsByPaginationQuery(baseOptions?: Apollo.QueryHookOptions<PostsByPaginationQuery, PostsByPaginationQueryVariables>) {
+        return Apollo.useQuery<PostsByPaginationQuery, PostsByPaginationQueryVariables>(PostsByPaginationDocument, baseOptions);
+      }
+export function usePostsByPaginationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsByPaginationQuery, PostsByPaginationQueryVariables>) {
+          return Apollo.useLazyQuery<PostsByPaginationQuery, PostsByPaginationQueryVariables>(PostsByPaginationDocument, baseOptions);
+        }
+export type PostsByPaginationQueryHookResult = ReturnType<typeof usePostsByPaginationQuery>;
+export type PostsByPaginationLazyQueryHookResult = ReturnType<typeof usePostsByPaginationLazyQuery>;
+export type PostsByPaginationQueryResult = Apollo.QueryResult<PostsByPaginationQuery, PostsByPaginationQueryVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {

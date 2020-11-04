@@ -4,6 +4,7 @@ import {
   GetServerSideProps,
 } from 'next';
 import { gql, useQuery } from '@apollo/client';
+import { initializeApollo } from '../../lib/apolloClient';
 
 const GET_POST_BY_SLUG = gql`
   query postBySlug($slug: String!) {
@@ -18,15 +19,6 @@ const GET_POST_BY_SLUG = gql`
     }
   }
 `;
-
-/*
-type Props = {
-  slug: {
-    current: string;
-  };
-  title: string;
-};
-*/
 
 type Props = {
   slug: string;
@@ -56,25 +48,19 @@ const Post: NextPage<Props> = (props: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug = '' } = context.params;
-  /*
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
     query: GET_POST_BY_SLUG,
     variables: { slug },
   });
-  */
 
-  /*
-  const props = await client.fetch('*[_type == "post" && slug.current == $slug][0]', { slug });
-  console.log(props);
-
-  return props;
-  */
+  const initialApolloState = apolloClient.cache.extract();
 
   return {
     props: {
       slug,
+      initialApolloState,
     },
   };
 };

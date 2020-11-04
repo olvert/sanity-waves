@@ -3,22 +3,13 @@ import {
   NextPage,
   GetServerSideProps,
 } from 'next';
-import { gql, useQuery } from '@apollo/client';
 import { initializeApollo } from '../../lib/apolloClient';
-
-const GET_POST_BY_SLUG = gql`
-  query postBySlug($slug: String!) {
-    allPost(where: {slug: { current: { eq: $slug}}}) {
-      title,
-      tags {
-        title,
-        slug {
-          current
-        }
-      }
-    }
-  }
-`;
+import {
+  PostBySlugDocument,
+  PostBySlugQuery,
+  PostBySlugQueryVariables,
+  usePostBySlugQuery,
+} from '../../generated/graphql';
 
 type Props = {
   slug: string;
@@ -26,14 +17,7 @@ type Props = {
 
 const Post: NextPage<Props> = (props: Props) => {
   const { slug } = props;
-  const { loading, data } = useQuery(
-    GET_POST_BY_SLUG,
-    {
-      variables: {
-        slug,
-      },
-    },
-  );
+  const { loading, data } = usePostBySlugQuery({ variables: { slug } });
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -50,9 +34,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug = '' } = context.params;
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
-    query: GET_POST_BY_SLUG,
-    variables: { slug },
+  await apolloClient.query<PostBySlugQuery, PostBySlugQueryVariables>({
+    query: PostBySlugDocument,
+    variables: {
+      slug: slug as string,
+    },
   });
 
   const initialApolloState = apolloClient.cache.extract();

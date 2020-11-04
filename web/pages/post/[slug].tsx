@@ -11,23 +11,23 @@ import {
   usePostBySlugQuery,
 } from '../../generated/graphql';
 
+import Post from '../../components/Post';
+
 type Props = {
   slug: string;
 };
 
-const Post: NextPage<Props> = (props: Props) => {
+const SinglePostPage: NextPage<Props> = (props: Props) => {
   const { slug } = props;
   const { loading, data } = usePostBySlugQuery({ variables: { slug } });
+
+  const post = data.allPost[0];
 
   if (loading) {
     return <h1>Loading...</h1>;
   }
 
-  return (
-    <article>
-      <h1>{JSON.stringify(data)}</h1>
-    </article>
-  );
+  return <Post {...post} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -51,4 +51,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Post;
+export default SinglePostPage;

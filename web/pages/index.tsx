@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import styles from '../styles/Home.module.css';
 import { initializeApollo } from '../lib/apolloClient';
 import {
   PostsByPaginationDocument,
@@ -27,17 +26,17 @@ const Home = (): JSX.Element => {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         { data.allPost.map((post) => <Post key={post.slug.current} {...post} />) }
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
       </footer>
     </div>
   );

@@ -28,6 +28,7 @@ query postsByPagination($limit: Int!, $offset: Int!) {
       slug {
         current
       }
-    }
+    },
+    publishedAt
   }
 }

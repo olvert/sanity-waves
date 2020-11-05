@@ -32,7 +32,7 @@ const Home = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="container mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 pt-4 sm:pt-6 xl:pt-10 xl:pr-32">
         { data.allPost.map((post) => <Post key={post.slug.current} {...post} />) }
       </main>
 

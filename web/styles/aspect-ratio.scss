@@ -1,0 +1,7 @@
+.aspect-ratio {
+  @apply relative h-0 overflow-hidden max-w-full;
+}
+
+.ar-16-9 {
+  padding-bottom: 56.23%; /* Use 75% for 4:3 videos */
+}

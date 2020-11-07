@@ -17,7 +17,7 @@ const Post = (props: Props): JSX.Element => {
   } = props;
 
   return (
-    <article>
+    <article className="w-full inline-block mb-3 sm:mb-4 lg:mb-6">
       { body.map((content) => (
         isVideo(content)
           ? <VideoContent key={content._key} {...content} />
@@ -26,7 +26,7 @@ const Post = (props: Props): JSX.Element => {
 
       <div className="flex justify-between mt-1 text-xxs sm:text-xs">
         <div className="flex-grow">
-          <span>{title} {separator}</span>
+          <span className="text-grayish">{title} {separator}</span>
           { tags.map((tag, i) => (
             <Fragment key={tag.slug.current}>
               <PostTag {...tag} />

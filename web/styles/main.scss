@@ -1,0 +1,15 @@
+html {
+  @apply h-full bg-white font-futura text-blackish text-left;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+a:focus,
+a:hover {
+  @apply text-blackish no-underline;
+}
+
+p {
+  @apply m-0;
+}

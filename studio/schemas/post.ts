@@ -2,6 +2,9 @@ export default {
   name: 'post',
   title: 'Post',
   type: 'document',
+  initialValue: (): unknown => ({
+    publishedAt: new Date().toISOString(),
+  }),
   fields: [
     {
       name: 'title',

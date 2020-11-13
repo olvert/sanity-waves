@@ -10,6 +10,7 @@ import tag from './tag';
 import video from './video';
 import post from './post';
 import siteSettings from './siteSettings';
+import menuItem from './menuItem';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -27,5 +28,6 @@ export default createSchema({
     // { type: 'typename' } in other document schemas
     postContent,
     siteSettings,
+    menuItem,
   ]),
 });

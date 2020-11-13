@@ -12,6 +12,18 @@ export default {
       type: 'string',
     },
     {
+      name: 'menuItems',
+      title: 'Menu Items',
+      type: 'array',
+      of: [
+        {
+          name: 'menuItem',
+          title: 'Menu Item',
+          type: 'menuItem',
+        },
+      ],
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',

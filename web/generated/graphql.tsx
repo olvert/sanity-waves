@@ -306,7 +306,16 @@ export type SiteSettings = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   siteTitle?: Maybe<Scalars['String']>;
+  menuItems?: Maybe<Array<Maybe<MenuItem>>>;
   publishedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type MenuItem = {
+  __typename?: 'MenuItem';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
 };
 
 export type SanityFileAsset = Document & {
@@ -793,6 +802,13 @@ export type VideoFilter = {
   isVimeo?: Maybe<BooleanFilter>;
 };
 
+export type MenuItemFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  url?: Maybe<StringFilter>;
+};
+
 export type ImageSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
@@ -828,6 +844,13 @@ export type VideoSorting = {
   _type?: Maybe<SortOrder>;
   videoId?: Maybe<SortOrder>;
   isVimeo?: Maybe<SortOrder>;
+};
+
+export type MenuItemSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  url?: Maybe<SortOrder>;
 };
 
 export type PostBySlugQueryVariables = Exact<{
@@ -901,6 +924,10 @@ export type SiteSettingsQuery = (
   & { allSiteSettings: Array<(
     { __typename?: 'SiteSettings' }
     & Pick<SiteSettings, 'siteTitle' | 'publishedAt'>
+    & { menuItems?: Maybe<Array<Maybe<(
+      { __typename?: 'MenuItem' }
+      & Pick<MenuItem, 'title' | 'url'>
+    )>>> }
   )> }
 );
 
@@ -1011,6 +1038,10 @@ export const SiteSettingsDocument = gql`
     query siteSettings {
   allSiteSettings(where: {_id: {eq: "siteSettings"}}, limit: 1, offset: 0) {
     siteTitle
+    menuItems {
+      title
+      url
+    }
     publishedAt
   }
 }

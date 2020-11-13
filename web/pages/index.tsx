@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { initializeApollo } from '../lib/apolloClient';
 import {
@@ -13,7 +12,7 @@ import {
 } from '../generated/graphql';
 
 import Post from '../components/Post';
-import Header from '../components/Header';
+import SiteLayout from '../components/SiteLayout';
 
 const POSTS_PER_PAGE = 5;
 
@@ -30,20 +29,9 @@ const Home = (): JSX.Element => {
   }
 
   return (
-    <div>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="container mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 pt-4 sm:pt-6 xl:pt-10 xl:pr-32">
-        <Header />
-        { data.allPost.map((post) => <Post key={post.slug.current} {...post} />) }
-      </main>
-
-      <footer>
-      </footer>
-    </div>
+    <SiteLayout>
+      { data.allPost.map((post) => <Post key={post.slug.current} {...post} />) }
+    </SiteLayout>
   );
 };
 

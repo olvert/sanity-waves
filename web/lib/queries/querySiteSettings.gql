@@ -1,0 +1,6 @@
+query siteSettings {
+  allSiteSettings(where: { _id: { eq: "siteSettings" } }, limit: 1, offset: 0) {
+    siteTitle,
+    publishedAt,
+  }
+}

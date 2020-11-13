@@ -20,10 +20,12 @@ export type RootQuery = {
   Document?: Maybe<Document>;
   Post?: Maybe<Post>;
   Tag?: Maybe<Tag>;
+  SiteSettings?: Maybe<SiteSettings>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   allPost: Array<Post>;
   allTag: Array<Tag>;
+  allSiteSettings: Array<SiteSettings>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
 };
@@ -40,6 +42,11 @@ export type RootQueryPostArgs = {
 
 
 export type RootQueryTagArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQuerySiteSettingsArgs = {
   id: Scalars['ID'];
 };
 
@@ -65,6 +72,14 @@ export type RootQueryAllPostArgs = {
 export type RootQueryAllTagArgs = {
   where?: Maybe<TagFilter>;
   sort?: Maybe<Array<TagSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllSiteSettingsArgs = {
+  where?: Maybe<SiteSettingsFilter>;
+  sort?: Maybe<Array<SiteSettingsSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -277,6 +292,23 @@ export type Video = {
   isVimeo?: Maybe<Scalars['Boolean']>;
 };
 
+export type SiteSettings = Document & {
+  __typename?: 'SiteSettings';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  siteTitle?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+};
+
 export type SanityFileAsset = Document & {
   __typename?: 'SanityFileAsset';
   /** Document ID */
@@ -424,6 +456,30 @@ export type TagSorting = {
   _key?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   slug?: Maybe<SlugSorting>;
+};
+
+export type SiteSettingsFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  siteTitle?: Maybe<StringFilter>;
+  publishedAt?: Maybe<DatetimeFilter>;
+};
+
+export type SiteSettingsSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  siteTitle?: Maybe<SortOrder>;
+  publishedAt?: Maybe<SortOrder>;
 };
 
 export type SanityImageAssetFilter = {
@@ -837,6 +893,17 @@ export type PostsByPaginationQuery = (
   )> }
 );
 
+export type SiteSettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteSettingsQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSiteSettings: Array<(
+    { __typename?: 'SiteSettings' }
+    & Pick<SiteSettings, 'siteTitle' | 'publishedAt'>
+  )> }
+);
+
 
 export const PostBySlugDocument = gql`
     query postBySlug($slug: String!) {
@@ -940,6 +1007,39 @@ export function usePostsByPaginationLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type PostsByPaginationQueryHookResult = ReturnType<typeof usePostsByPaginationQuery>;
 export type PostsByPaginationLazyQueryHookResult = ReturnType<typeof usePostsByPaginationLazyQuery>;
 export type PostsByPaginationQueryResult = Apollo.QueryResult<PostsByPaginationQuery, PostsByPaginationQueryVariables>;
+export const SiteSettingsDocument = gql`
+    query siteSettings {
+  allSiteSettings(where: {_id: {eq: "siteSettings"}}, limit: 1, offset: 0) {
+    siteTitle
+    publishedAt
+  }
+}
+    `;
+
+/**
+ * __useSiteSettingsQuery__
+ *
+ * To run a query within a React component, call `useSiteSettingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSiteSettingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSiteSettingsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSiteSettingsQuery(baseOptions?: Apollo.QueryHookOptions<SiteSettingsQuery, SiteSettingsQueryVariables>) {
+        return Apollo.useQuery<SiteSettingsQuery, SiteSettingsQueryVariables>(SiteSettingsDocument, baseOptions);
+      }
+export function useSiteSettingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SiteSettingsQuery, SiteSettingsQueryVariables>) {
+          return Apollo.useLazyQuery<SiteSettingsQuery, SiteSettingsQueryVariables>(SiteSettingsDocument, baseOptions);
+        }
+export type SiteSettingsQueryHookResult = ReturnType<typeof useSiteSettingsQuery>;
+export type SiteSettingsLazyQueryHookResult = ReturnType<typeof useSiteSettingsLazyQuery>;
+export type SiteSettingsQueryResult = Apollo.QueryResult<SiteSettingsQuery, SiteSettingsQueryVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
@@ -952,6 +1052,7 @@ export type PostsByPaginationQueryResult = Apollo.QueryResult<PostsByPaginationQ
       "Post",
       "Tag",
       "SanityImageAsset",
+      "SiteSettings",
       "SanityFileAsset"
     ],
     "ImageOrVideo": [

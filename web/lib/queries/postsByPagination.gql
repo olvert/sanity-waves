@@ -20,7 +20,6 @@ query postsByPagination($limit: Int!, $offset: Int!) {
       ... on Video {
         _key,
         videoId,
-        isVimeo
       }
     },
     tags {

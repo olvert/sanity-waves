@@ -289,7 +289,6 @@ export type Video = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   videoId?: Maybe<Scalars['String']>;
-  isVimeo?: Maybe<Scalars['Boolean']>;
 };
 
 export type SiteSettings = Document & {
@@ -799,7 +798,6 @@ export type VideoFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   videoId?: Maybe<StringFilter>;
-  isVimeo?: Maybe<BooleanFilter>;
 };
 
 export type MenuItemFilter = {
@@ -843,7 +841,6 @@ export type VideoSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   videoId?: Maybe<SortOrder>;
-  isVimeo?: Maybe<SortOrder>;
 };
 
 export type MenuItemSorting = {
@@ -904,7 +901,7 @@ export type PostsByPaginationQuery = (
       )> }
     ) | (
       { __typename?: 'Video' }
-      & Pick<Video, '_key' | 'videoId' | 'isVimeo'>
+      & Pick<Video, '_key' | 'videoId'>
     )>>>, tags?: Maybe<Array<Maybe<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'title'>
@@ -1009,7 +1006,6 @@ export const PostsByPaginationDocument = gql`
       ... on Video {
         _key
         videoId
-        isVimeo
       }
     }
     tags {

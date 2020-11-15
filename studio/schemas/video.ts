@@ -8,10 +8,5 @@ export default {
       name: 'videoId',
       type: 'text',
     },
-    {
-      title: 'Use Vimeo as source instead of Youtube',
-      name: 'isVimeo',
-      type: 'boolean',
-    },
   ],
 };

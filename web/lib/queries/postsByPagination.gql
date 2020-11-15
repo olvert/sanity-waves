@@ -1,5 +1,5 @@
 query postsByPagination($limit: Int!, $offset: Int!) {
-  allPost(limit: $limit, offset: $offset) {
+  allPost(limit: $limit, offset: $offset, sort: { _createdAt: DESC }) {
     title,
     slug {
       current

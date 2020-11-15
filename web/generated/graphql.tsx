@@ -988,7 +988,7 @@ export type PostBySlugLazyQueryHookResult = ReturnType<typeof usePostBySlugLazyQ
 export type PostBySlugQueryResult = Apollo.QueryResult<PostBySlugQuery, PostBySlugQueryVariables>;
 export const PostsByPaginationDocument = gql`
     query postsByPagination($limit: Int!, $offset: Int!) {
-  allPost(limit: $limit, offset: $offset) {
+  allPost(limit: $limit, offset: $offset, sort: {_createdAt: DESC}) {
     title
     slug {
       current

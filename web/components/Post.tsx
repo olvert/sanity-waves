@@ -14,6 +14,7 @@ const Post = (props: Props): JSX.Element => {
     body,
     tags,
     publishedAt,
+    hideTitle,
   } = props;
 
   return (
@@ -26,7 +27,7 @@ const Post = (props: Props): JSX.Element => {
 
       <div className="flex justify-between mt-1 text-xxs sm:text-xs">
         <div className="flex-grow">
-          <span className="text-grayish">{title} {separator}</span>
+        { hideTitle === false && <span className="text-grayish">{title} {separator}</span> }
           { tags.map((tag, i) => (
             <Fragment key={tag.slug.current}>
               <PostTag {...tag} />

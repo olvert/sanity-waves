@@ -29,6 +29,7 @@ query postsByPagination($limit: Int!, $offset: Int!) {
         current
       }
     },
+    hideTitle,
     publishedAt
   }
 }

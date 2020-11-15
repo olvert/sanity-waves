@@ -4,6 +4,7 @@ export default {
   type: 'document',
   initialValue: (): unknown => ({
     publishedAt: new Date().toISOString(),
+    hideTitle: false,
   }),
   fields: [
     {

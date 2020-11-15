@@ -884,7 +884,7 @@ export type PostsByPaginationQuery = (
   { __typename?: 'RootQuery' }
   & { allPost: Array<(
     { __typename?: 'Post' }
-    & Pick<Post, 'title' | 'publishedAt'>
+    & Pick<Post, 'title' | 'hideTitle' | 'publishedAt'>
     & { slug?: Maybe<(
       { __typename?: 'Slug' }
       & Pick<Slug, 'current'>
@@ -1018,6 +1018,7 @@ export const PostsByPaginationDocument = gql`
         current
       }
     }
+    hideTitle
     publishedAt
   }
 }

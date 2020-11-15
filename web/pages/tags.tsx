@@ -18,7 +18,9 @@ const TagsPage = (): JSX.Element => {
 
   return (
     <SiteLayout>
-      { data.allTag.map((t) => <a key={t.slug.current} href={t.slug.current}>{t.title}</a>)}
+      <div className="grid grid-cols-2 lg:grid-cols-3 mb-10">
+        { data.allTag.map((t) => <div key={t.slug.current}><a href={t.slug.current} className="border-transparent border-b-2 hover:border-blackish text-base sm:text-xl">{t.title}</a></div>)}
+      </div>
     </SiteLayout>
   );
 };

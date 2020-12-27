@@ -17,12 +17,26 @@ import SiteLayout from '../components/SiteLayout';
 const POSTS_PER_PAGE = 5;
 
 const Home = (): JSX.Element => {
-  const { loading, data } = usePostsByPaginationQuery({
+  const {
+    loading,
+    data,
+    fetchMore,
+  } = usePostsByPaginationQuery({
     variables: {
       limit: POSTS_PER_PAGE,
       offset: 0,
     },
   });
+
+  const loadMorePosts = (): void => {
+    const currentLength = data.allPost.length;
+    fetchMore({
+      variables: {
+        limit: POSTS_PER_PAGE,
+        offset: currentLength,
+      },
+    });
+  };
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -30,7 +44,13 @@ const Home = (): JSX.Element => {
 
   return (
     <SiteLayout>
-      { data.allPost.map((post) => <Post key={post.slug.current} {...post} />) }
+      { data
+        && data.allPost
+        && data.allPost.map((post) => <Post key={post.slug.current} {...post} />)
+      }
+      <button onClick={loadMorePosts}>
+        Load more
+      </button>
     </SiteLayout>
   );
 };

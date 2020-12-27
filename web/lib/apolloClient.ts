@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-import { concatPagination } from '@apollo/client/utilities';
+import { offsetLimitPagination } from '@apollo/client/utilities';
 
 let apolloClient: ApolloClient<any>;
 
@@ -15,7 +15,7 @@ const createApolloClient = () => (
       typePolicies: {
         Query: {
           fields: {
-            allPosts: concatPagination(),
+            allPost: offsetLimitPagination(),
           },
         },
       },

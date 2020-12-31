@@ -13,6 +13,7 @@ import {
 
 import Post from '../components/Post';
 import SiteLayout from '../components/SiteLayout';
+import InfiniteScroll from '../components/InfiniteScroll';
 
 const POSTS_PER_PAGE = 5;
 
@@ -28,9 +29,9 @@ const Home = (): JSX.Element => {
     },
   });
 
-  const loadMorePosts = (): void => {
+  const loadMorePosts = (): Promise<unknown> => {
     const currentLength = data.allPost.length;
-    fetchMore({
+    return fetchMore({
       variables: {
         limit: POSTS_PER_PAGE,
         offset: currentLength,
@@ -44,10 +45,12 @@ const Home = (): JSX.Element => {
 
   return (
     <SiteLayout>
-      { data
-        && data.allPost
-        && data.allPost.map((post) => <Post key={post.slug.current} {...post} />)
-      }
+      <InfiniteScroll loadMore={loadMorePosts}>
+        { data
+          && data.allPost
+          && data.allPost.map((post) => <Post key={post.slug.current} {...post} />)
+        }
+      </InfiniteScroll>
       <button onClick={loadMorePosts}>
         Load more
       </button>

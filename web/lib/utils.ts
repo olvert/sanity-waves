@@ -16,3 +16,6 @@ export const formatDate = (dateString: string): string => {
 
   return `${prependZeroes(day, 2)}/${prependZeroes(month, 2)}/${prependZeroes(year, 2)}`;
 };
+
+export const isClient = (): boolean => typeof window !== 'undefined';
+export const isServer = (): boolean => typeof window === 'undefined';

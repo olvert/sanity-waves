@@ -3,7 +3,13 @@ import _ from 'lodash';
 
 type Props = {
   children: React.ReactNode;
-  loadMore: () => Promise<unknown>
+  loadMore: () => Promise<boolean>
+}
+
+enum LoadingState {
+  Idle,
+  Loading,
+  Exhausted
 }
 
 const shouldLoad = (div: HTMLDivElement): boolean => {
@@ -16,25 +22,38 @@ const shouldLoad = (div: HTMLDivElement): boolean => {
 const InfiniteScroll = (props: Props): JSX.Element => {
   const { children, loadMore } = props;
   const ref = useRef<HTMLDivElement>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.Idle);
 
   const scrollHandler = () => {
-    if (isLoading) { return; }
+    if (loadingState !== LoadingState.Idle) { return; }
 
     if (shouldLoad(ref.current)) {
-      setIsLoading(true);
-      loadMore().then(() => setIsLoading(false));
+      setLoadingState(LoadingState.Loading);
+      loadMore().then((isExhausted) => {
+        const nextLoadingState = isExhausted ? LoadingState.Exhausted : LoadingState.Idle;
+        setLoadingState(nextLoadingState);
+      });
     }
   };
 
   const throttledScrollHandler = _.throttle(scrollHandler, 400);
 
+  const addListener = () => window.addEventListener('scroll', throttledScrollHandler, { passive: true });
+  const removeListener = () => window.removeEventListener('scroll', throttledScrollHandler);
+
   useEffect(() => {
-    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
+    switch (loadingState) {
+      case LoadingState.Exhausted:
+        removeListener();
+        break;
+      default:
+        addListener();
+        break;
+    }
 
     throttledScrollHandler();
 
-    return () => window.removeEventListener('scroll', throttledScrollHandler);
+    return removeListener;
   });
 
   return (

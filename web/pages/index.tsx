@@ -1,16 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { ApolloQueryResult } from '@apollo/client';
-import { initializeApollo } from '../lib/apolloClient';
-import {
-  PostsByPaginationDocument,
-  PostsByPaginationQuery,
-  PostsByPaginationQueryVariables,
-  SiteSettingsDocument,
-  SiteSettingsQuery,
-  SiteSettingsQueryVariables,
-  usePostsByPaginationQuery,
-} from '../generated/graphql';
 
 import Post from '../components/Post';
 import SiteLayout from '../components/SiteLayout';
@@ -20,44 +9,22 @@ import { SiteSettings, Post as PostModel } from '../../studio/models';
 
 type Props = {
   settings: SiteSettings;
-  posts: PostModel[];
+  initialPosts: PostModel[];
 }
 
-const POSTS_PER_PAGE = 5;
-
-const allPostsLoaded = (fetchResult: ApolloQueryResult<PostsByPaginationQuery>): boolean => (
-  fetchResult.data.allPost.length === 0
-);
-
 const Home = (props: Props): JSX.Element => {
-  const { settings, posts } = props;
-  const {
-    loading,
-    data,
-    fetchMore,
-  } = usePostsByPaginationQuery({
-    variables: {
-      limit: POSTS_PER_PAGE,
-      offset: 0,
-    },
-  });
+  const { settings, initialPosts } = props;
+  const [posts, setPosts] = useState<PostModel[]>(initialPosts);
 
   const loadMorePosts = async (): Promise<boolean> => {
-    const currentLength = data.allPost.length;
+    const offset = posts.length;
 
-    const result = await fetchMore({
-      variables: {
-        limit: POSTS_PER_PAGE,
-        offset: currentLength,
-      },
-    });
+    const newPosts = await getPosts(offset);
 
-    return allPostsLoaded(result);
+    setPosts([...posts, ...newPosts]);
+
+    return newPosts.length > 0;
   };
-
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
 
   return (
     <SiteLayout settings={settings}>
@@ -73,32 +40,15 @@ const Home = (props: Props): JSX.Element => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const apolloClient = initializeApollo();
+  const settingsPromise = getSiteSettings();
+  const initialPostsPromise = getPosts(0);
 
-  const postsPromise = apolloClient.query<PostsByPaginationQuery, PostsByPaginationQueryVariables>({
-    query: PostsByPaginationDocument,
-    variables: {
-      limit: POSTS_PER_PAGE,
-      offset: 0,
-    },
-  });
-
-  const siteSettingsPromise = apolloClient.query<SiteSettingsQuery, SiteSettingsQueryVariables>({
-    query: SiteSettingsDocument,
-  });
-
-  const settings = await getSiteSettings();
-  const posts = await getPosts();
-
-  await Promise.all([postsPromise, siteSettingsPromise]);
-
-  const initialApolloState = apolloClient.cache.extract();
+  const [settings, initialPosts] = await Promise.all([settingsPromise, initialPostsPromise]);
 
   return {
     props: {
-      initialApolloState,
       settings,
-      posts,
+      initialPosts,
     },
   };
 };

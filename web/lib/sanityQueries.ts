@@ -2,7 +2,12 @@ import groq from 'groq';
 import sanityClient from './sanityClient';
 import { Post, SiteSettings } from '../../studio/models';
 
-export const getPosts = (): Promise<Post[]> => {
+const POSTS_PER_PAGE = 5;
+
+export const getPosts = (offset: number): Promise<Post[]> => {
+  const start = offset;
+  const end = offset + POSTS_PER_PAGE;
+
   const query = groq`
     *[_type == 'post'] {
       title,
@@ -33,9 +38,12 @@ export const getPosts = (): Promise<Post[]> => {
       slug {
         current
       }
-    } [0...10]`;
+    } | order(_createdAt desc) [$start..$end]`;
 
-  return sanityClient.fetch(query);
+  return sanityClient.fetch(query, {
+    start,
+    end,
+  });
 };
 
 export const getSiteSettings = (): Promise<SiteSettings> => {

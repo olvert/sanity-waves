@@ -80,6 +80,14 @@
   dependencies:
     tslib "~2.0.1"
 
+"@asbjorn/eslint-plugin-groq@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@asbjorn/eslint-plugin-groq/-/eslint-plugin-groq-1.0.0.tgz#1fe79442859835da284554106d22e294369b13fc"
+  integrity sha512-pE55kaOLfiongtRbt0wkI49UXzBAEfZNpRytunxm1OHIeeElzP01JGcwdu/QsnxDNkaemaUCbYrgMDUU7riU0A==
+  dependencies:
+    eslint-ast-utils "^1.1.0"
+    groq-js "^0.1.4"
+
 "@babel/code-frame@7.10.4", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.5.5":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -4227,6 +4235,14 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+eslint-ast-utils@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-ast-utils/-/eslint-ast-utils-1.1.0.tgz#3d58ba557801cfb1c941d68131ee9f8c34bd1586"
+  integrity sha512-otzzTim2/1+lVrlH19EfQQJEhVJSu0zOb9ygb3iapN6UlyaDtyRq4b5U1FuW0v1lRa9Fp/GJyHkSwm6NqABgCA==
+  dependencies:
+    lodash.get "^4.4.2"
+    lodash.zip "^4.2.0"
+
 eslint-config-airbnb-base@^14.2.0:
   version "14.2.0"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-14.2.0.tgz#fe89c24b3f9dc8008c9c0d0d88c28f95ed65e9c4"
@@ -5033,6 +5049,16 @@ graphql@^15.3.0:
   version "15.3.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.3.0.tgz#3ad2b0caab0d110e3be4a5a9b2aa281e362b5278"
   integrity sha512-GTCJtzJmkFLWRfFJuoo9RWWa/FfamUHgiFosxi/X1Ani4AVWbeyBenZTNX6dM+7WSbbFfTo/25eh0LLkwHMw2w==
+
+groq-js@^0.1.4:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/groq-js/-/groq-js-0.1.8.tgz#4be23ed4d90c492e92da307929cb588f872e98fc"
+  integrity sha512-RD9uS4JN2/8UsCHrIfdqic6mYFqjC6QxyV+iSEH01PM0s/AqzmASRr1gmcCHHCGckK8m9JTfJ94EwBehrtjMNQ==
+
+groq@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/groq/-/groq-2.1.4.tgz#aa555c2ee904831ddc8dccae4fa0a4ff7647e1cf"
+  integrity sha512-RoUkPOhr9nKGhpGNkA5h6EgF/kzEfrrxRxblPHQqURrncXBd+KYzcJHQmR4UBFOg9OK9ZUhxXPJrLdlA3dqHIg==
 
 har-schema@^2.0.0:
   version "2.0.0"
@@ -6043,7 +6069,7 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
-lodash.get@^4:
+lodash.get@^4, lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
@@ -6107,6 +6133,11 @@ lodash.toarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
   integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
+
+lodash.zip@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
+  integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
 lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@~4.17.20:
   version "4.17.20"

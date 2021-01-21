@@ -13,12 +13,14 @@
     "@sanity/client": "^2.0.1",
     "@types/lodash": "^4.14.166",
     "graphql": "^15.3.0",
+    "groq": "^2.1.4",
     "lodash": "^4.17.20",
     "next": "10.0.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
   "devDependencies": {
+    "@asbjorn/eslint-plugin-groq": "^1.0.0",
     "@graphql-codegen/cli": "1.19.0",
     "@graphql-codegen/fragment-matcher": "2.0.0",
     "@graphql-codegen/introspection": "1.18.0",

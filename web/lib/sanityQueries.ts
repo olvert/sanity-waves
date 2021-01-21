@@ -6,13 +6,33 @@ export const getPosts = (): Promise<Post[]> => {
   const query = groq`
     *[_type == 'post'] {
       title,
-      body,
+      body[] {
+        _type == 'video' => {
+          _key,
+          videoId
+        },
+        _type == 'image' => {
+          _key,
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                height,
+                width
+              }
+            }
+          }
+        }
+      },
       tags[]-> {
         title,
         slug
       },
       publishedAt,
-      hideTitle
+      hideTitle,
+      slug {
+        current
+      }
     } [0...10]`;
 
   return sanityClient.fetch(query);

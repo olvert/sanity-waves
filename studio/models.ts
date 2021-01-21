@@ -60,7 +60,7 @@ export interface Post extends SanityDocument {
    *
    *
    */
-  tags?: Array<SanityKeyedReference<Tag>>;
+  tags?: Array<Tag>;
 
   /**
    * Published at — `datetime`
@@ -120,7 +120,7 @@ export interface SiteSettings extends SanityDocument {
    *
    *
    */
-  menuItems?: Array<SanityKeyed<MenuItem>>;
+  menuItems?: Array<MenuItem>;
 
   /**
    * Published at — `datetime`

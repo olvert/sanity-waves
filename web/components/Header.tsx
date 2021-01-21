@@ -1,11 +1,9 @@
 import React from 'react';
-import { useSiteSettingsQuery } from '../generated/graphql';
+import { SiteSettings } from '../../studio/models';
 import MenuItem from './MenuItem';
 
-const Header = (): JSX.Element => {
-  const { loading, data } = useSiteSettingsQuery();
-  const settings = data.allSiteSettings[0];
-  const { siteTitle, menuItems } = settings;
+const Header = (props: SiteSettings): JSX.Element => {
+  const { siteTitle, menuItems } = props;
 
   return (
     <div>

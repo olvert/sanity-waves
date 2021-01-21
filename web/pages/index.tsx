@@ -15,6 +15,13 @@ import {
 import Post from '../components/Post';
 import SiteLayout from '../components/SiteLayout';
 import InfiniteScroll from '../components/InfiniteScroll';
+import { getPosts, getSiteSettings } from '../lib/sanityQueries';
+import { SiteSettings, Post as PostModel } from '../../studio/models';
+
+type Props = {
+  settings: SiteSettings;
+  posts: PostModel[];
+}
 
 const POSTS_PER_PAGE = 5;
 
@@ -22,7 +29,8 @@ const allPostsLoaded = (fetchResult: ApolloQueryResult<PostsByPaginationQuery>):
   fetchResult.data.allPost.length === 0
 );
 
-const Home = (): JSX.Element => {
+const Home = (props: Props): JSX.Element => {
+  const { settings, posts } = props;
   const {
     loading,
     data,
@@ -52,11 +60,9 @@ const Home = (): JSX.Element => {
   }
 
   return (
-    <SiteLayout>
+    <SiteLayout settings={settings}>
       <InfiniteScroll loadMore={loadMorePosts}>
-        { data
-          && data.allPost
-          && data.allPost.map((post) => <Post key={post.slug.current} {...post} />)
+        { posts.map((post) => <Post key={post.slug.current} {...post} />)
         }
       </InfiniteScroll>
       <button onClick={loadMorePosts}>
@@ -81,6 +87,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     query: SiteSettingsDocument,
   });
 
+  const settings = await getSiteSettings();
+  const posts = await getPosts();
+
   await Promise.all([postsPromise, siteSettingsPromise]);
 
   const initialApolloState = apolloClient.cache.extract();
@@ -88,6 +97,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       initialApolloState,
+      settings,
+      posts,
     },
   };
 };

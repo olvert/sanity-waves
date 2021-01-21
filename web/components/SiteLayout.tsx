@@ -1,13 +1,15 @@
 import Head from 'next/head';
 import React from 'react';
+import { SiteSettings } from '../../studio/models';
 import Header from './Header';
 
 type Props = {
   children: React.ReactNode,
+  settings: SiteSettings,
 }
 
 const SiteLayout = (props: Props): JSX.Element => {
-  const { children } = props;
+  const { children, settings } = props;
 
   return (
     <div>
@@ -17,7 +19,7 @@ const SiteLayout = (props: Props): JSX.Element => {
       </Head>
 
       <main className="container mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 pt-4 sm:pt-6 xl:pt-10 xl:pr-32">
-        <Header />
+        <Header {...settings} />
         { children }
       </main>
 

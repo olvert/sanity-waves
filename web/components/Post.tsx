@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Fragment } from 'react';
-import { Post as Props } from '../generated/graphql';
+import { Post as Props } from '../../studio/models';
 import { formatDate, isVideo } from '../lib/utils';
 import ImageContent from './ImageContent';
 import PostTag from './PostTag';

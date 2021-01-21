@@ -1,4 +1,4 @@
-import { Video } from '../generated/graphql';
+import { Video } from '../../studio/models';
 
 const prependZeroes = (s: string, length: number): string => `${'0'.repeat(length - s.length)}${s}`;
 

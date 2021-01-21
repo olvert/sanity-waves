@@ -1,8 +1,0 @@
-query tags {
-  allTag(where: {}, limit: 9999, offset: 0) {
-    title,
-    slug {
-      current
-    }
-  }
-}

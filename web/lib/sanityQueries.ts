@@ -1,6 +1,6 @@
 import groq from 'groq';
 import sanityClient from './sanityClient';
-import { Post, SiteSettings } from '../../studio/models';
+import { Post, SiteSettings, Tag } from '../../studio/models';
 
 const POSTS_PER_PAGE = 5;
 
@@ -55,6 +55,18 @@ export const getSiteSettings = (): Promise<SiteSettings> => {
       },
       siteTitle
     } [0]`;
+
+  return sanityClient.fetch(query);
+};
+
+export const getTags = (): Promise<Tag[]> => {
+  const query = groq`
+    *[_type == 'tag'] | order(title) {
+      title,
+      slug {
+        current      
+      }
+    }`;
 
   return sanityClient.fetch(query);
 };

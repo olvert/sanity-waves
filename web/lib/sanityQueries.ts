@@ -46,6 +46,49 @@ export const getPosts = (offset: number): Promise<Post[]> => {
   });
 };
 
+export const getTagPosts = (slug: string, offset: number): Promise<Post[]> => {
+  const start = offset;
+  const end = offset + POSTS_PER_PAGE;
+
+  const query = groq`
+    *[_type == 'post' && $slug in tags[]->slug.current] {
+      title,
+      body[] {
+        _type == 'video' => {
+          _key,
+          videoId
+        },
+        _type == 'image' => {
+          _key,
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                height,
+                width
+              }
+            }
+          }
+        }
+      },
+      tags[]-> {
+        title,
+        slug
+      },
+      publishedAt,
+      hideTitle,
+      slug {
+        current
+      }
+    } | order(_createdAt desc) [$start..$end]`;
+
+  return sanityClient.fetch(query, {
+    slug,
+    start,
+    end,
+  });
+};
+
 export const getSiteSettings = (): Promise<SiteSettings> => {
   const query = groq`
     *[_type == "siteSettings"] {

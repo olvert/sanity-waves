@@ -22,7 +22,7 @@ const PostPage = (props: Props): JSX.Element => {
 
     setPosts([...posts, ...newPosts]);
 
-    return newPosts.length > 0;
+    return newPosts.length === 0;
   };
 
   return (

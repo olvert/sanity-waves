@@ -141,12 +141,7 @@ export type Video = {
 };
 
 export type PostContent = Array<
-  | SanityKeyed<{
-      _type: "image";
-      asset: SanityAsset;
-      crop?: SanityImageCrop;
-      hotspot?: SanityImageHotspot;
-    }>
+  | SanityKeyed<Image>
   | SanityKeyed<Video>
 >;
 
@@ -168,3 +163,16 @@ export type MenuItem = {
 };
 
 export type Documents = Post | Tag | SiteSettings;
+
+export type Image = {
+  _type: 'image'
+  asset: {
+    url,
+    metadata: {
+      dimensions: {
+        width: number,
+        height: number,
+      }
+    }
+  }
+}

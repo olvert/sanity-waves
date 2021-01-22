@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag as Props } from '../generated/graphql';
+import { Tag as Props } from '../../studio/models';
 
 const PostTag = (props: Props): JSX.Element => {
   const { slug, title } = props;

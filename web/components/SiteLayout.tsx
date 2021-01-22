@@ -10,11 +10,12 @@ type Props = {
 
 const SiteLayout = (props: Props): JSX.Element => {
   const { children, settings } = props;
+  const { siteTitle } = settings;
 
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>{siteTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

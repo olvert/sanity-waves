@@ -38,7 +38,7 @@ export const getPosts = (offset: number): Promise<Post[]> => {
       slug {
         current
       }
-    } | order(_createdAt desc) [$start..$end]`;
+    } | order(_createdAt desc) [$start...$end]`;
 
   return sanityClient.fetch(query, {
     start,
@@ -80,7 +80,7 @@ export const getTagPosts = (slug: string, offset: number): Promise<Post[]> => {
       slug {
         current
       }
-    } | order(_createdAt desc) [$start..$end]`;
+    } | order(_createdAt desc) [$start...$end]`;
 
   return sanityClient.fetch(query, {
     slug,

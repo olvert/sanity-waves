@@ -19,3 +19,5 @@ export const formatDate = (dateString: string): string => {
 
 export const isClient = (): boolean => typeof window !== 'undefined';
 export const isServer = (): boolean => typeof window === 'undefined';
+
+export const getTagPageHref = (slug: string): string => `/tag/${encodeURIComponent(slug)}`;

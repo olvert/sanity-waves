@@ -1,9 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 
 import SiteLayout from '../components/SiteLayout';
 import { getSiteSettings, getTags } from '../lib/sanityQueries';
 import { SiteSettings, Tag } from '../../studio/models';
+import { getTagPageHref } from '../lib/utils';
 
 type Props = {
   settings: SiteSettings;
@@ -16,7 +18,15 @@ const TagsPage = (props: Props): JSX.Element => {
   return (
     <SiteLayout settings={settings}>
       <div className="grid grid-cols-2 lg:grid-cols-3 mb-10">
-        { tags.map((t) => <div key={t.slug.current}><a href={t.slug.current} className="border-transparent border-b-2 hover:border-blackish text-base sm:text-xl">{t.title}</a></div>)}
+        { tags.map((t) => (
+          <div key={t.slug.current}>
+            <Link href={getTagPageHref(t.slug.current)}>
+              <a className="border-transparent border-b-2 hover:border-blackish text-base sm:text-xl">
+                {t.title}
+              </a>
+            </Link>
+          </div>
+        ))}
       </div>
     </SiteLayout>
   );

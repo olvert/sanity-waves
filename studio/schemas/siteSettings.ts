@@ -24,6 +24,11 @@ export default {
       ],
     },
     {
+      name: 'playlistUrl',
+      title: 'Playlist URL',
+      type: 'string',
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',

@@ -1,30 +1,13 @@
-import type {
-  SanityReference,
-  SanityKeyedReference,
-  SanityAsset,
-  SanityImage,
-  SanityFile,
-  SanityGeoPoint,
-  SanityBlock,
-  SanityDocument,
-  SanityImageCrop,
-  SanityImageHotspot,
-  SanityKeyed,
-} from 'sanity-codegen';
+export interface SanityDocument {
+  _id: string;
+  _createdAt: string;
+  _rev: string;
+  _updatedAt: string;
+}
 
-export type {
-  SanityReference,
-  SanityKeyedReference,
-  SanityAsset,
-  SanityImage,
-  SanityFile,
-  SanityGeoPoint,
-  SanityBlock,
-  SanityDocument,
-  SanityImageCrop,
-  SanityImageHotspot,
-  SanityKeyed,
-};
+export declare type SanityKeyed<T> = T extends Record<string, unknown> ? T & {
+  _key: string;
+} : T;
 
 export interface Post extends SanityDocument {
   _type: 'post';

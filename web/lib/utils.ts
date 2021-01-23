@@ -1,3 +1,4 @@
+import { version } from '../package.json';
 import { Video } from '../../studio/models';
 
 const prependZeroes = (s: string, length: number): string => `${'0'.repeat(length - s.length)}${s}`;
@@ -21,3 +22,5 @@ export const isClient = (): boolean => typeof window !== 'undefined';
 export const isServer = (): boolean => typeof window === 'undefined';
 
 export const getTagPageHref = (slug: string): string => `/tag/${encodeURIComponent(slug)}`;
+
+export const getVersion = (): string => `v${version}`;

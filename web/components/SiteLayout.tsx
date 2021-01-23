@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import { SiteSettings } from '../../studio/models';
+import { getVersion } from '../lib/utils';
 import Header from './Header';
 
 type Props = {
@@ -24,7 +25,10 @@ const SiteLayout = (props: Props): JSX.Element => {
         { children }
       </main>
 
-      <footer>
+      <footer className="container mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32 mb-2">
+        <p className="text-grayish text-center text-xxs sm:text-xs py-3">
+          {getVersion()}
+        </p>
       </footer>
     </div>
   );

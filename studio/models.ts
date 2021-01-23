@@ -10,7 +10,7 @@ import type {
   SanityImageCrop,
   SanityImageHotspot,
   SanityKeyed,
-} from "sanity-codegen";
+} from 'sanity-codegen';
 
 export type {
   SanityReference,
@@ -26,117 +26,32 @@ export type {
   SanityKeyed,
 };
 
-/**
- * Post
- *
- *
- */
 export interface Post extends SanityDocument {
-  _type: "post";
-
-  /**
-   * Title — `string`
-   *
-   *
-   */
+  _type: 'post';
   title?: string;
-
-  /**
-   * Hide title — `boolean`
-   *
-   *
-   */
   hideTitle?: boolean;
-
-  /**
-   * Slug — `slug`
-   *
-   *
-   */
-  slug?: { _type: "slug"; current: string };
-
-  /**
-   * Tags — `array`
-   *
-   *
-   */
+  slug?: { _type: 'slug'; current: string };
   tags?: Array<Tag>;
-
-  /**
-   * Published at — `datetime`
-   *
-   *
-   */
   publishedAt?: string;
-
-  /**
-   * Body — `postContent`
-   *
-   *
-   */
   body?: PostContent;
 }
 
-/**
- * Tag
- *
- *
- */
 export interface Tag extends SanityDocument {
-  _type: "tag";
-
-  /**
-   * Title — `string`
-   *
-   *
-   */
+  _type: 'tag';
   title?: string;
-
-  /**
-   * Slug — `slug`
-   *
-   *
-   */
-  slug?: { _type: "slug"; current: string };
+  slug?: { _type: 'slug'; current: string };
 }
 
-/**
- * Site Settings
- *
- *
- */
 export interface SiteSettings extends SanityDocument {
-  _type: "siteSettings";
-
-  /**
-   * Site title — `string`
-   *
-   *
-   */
+  _type: 'siteSettings';
   siteTitle?: string;
-
-  /**
-   * Menu Items — `array`
-   *
-   *
-   */
+  playlistUrl?: string;
   menuItems?: Array<MenuItem>;
-
-  /**
-   * Published at — `datetime`
-   *
-   *
-   */
   publishedAt?: string;
 }
 
 export type Video = {
-  _type: "video";
-  /**
-   * Video Id — `text`
-   *
-   *
-   */
+  _type: 'video';
   videoId?: string;
 };
 
@@ -146,19 +61,8 @@ export type PostContent = Array<
 >;
 
 export type MenuItem = {
-  _type: "menuItem";
-  /**
-   * Title — `text`
-   *
-   *
-   */
+  _type: 'menuItem';
   title?: string;
-
-  /**
-   * Url — `text`
-   *
-   *
-   */
   url?: string;
 };
 

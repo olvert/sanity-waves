@@ -27,14 +27,13 @@ const InfiniteScroll = (props: Props): JSX.Element => {
 
   const scrollHandler = () => {
     if (loadingState !== LoadingState.Idle) { return; }
+    if (shouldLoad(ref.current, threshold) === false) { return; }
 
-    if (shouldLoad(ref.current, threshold)) {
-      setLoadingState(LoadingState.Loading);
-      loadMore().then((isExhausted) => {
-        const nextLoadingState = isExhausted ? LoadingState.Exhausted : LoadingState.Idle;
-        setLoadingState(nextLoadingState);
-      });
-    }
+    setLoadingState(LoadingState.Loading);
+    loadMore().then((isExhausted) => {
+      const nextLoadingState = isExhausted ? LoadingState.Exhausted : LoadingState.Idle;
+      setLoadingState(nextLoadingState);
+    });
   };
 
   const throttledScrollHandler = _.throttle(scrollHandler, 400);

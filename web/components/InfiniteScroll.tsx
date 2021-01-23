@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 type Props = {
   children: React.ReactNode;
-  loadMore: () => Promise<boolean>
+  loadMore: () => Promise<boolean>;
+  threshold?: number;
 }
 
 enum LoadingState {
@@ -12,22 +13,22 @@ enum LoadingState {
   Exhausted
 }
 
-const shouldLoad = (div: HTMLDivElement): boolean => {
-  const divBottomY = div.scrollHeight + div.offsetTop;
+const shouldLoad = (div: HTMLDivElement, threshold: number): boolean => {
+  const bottomY = div.scrollHeight + div.offsetTop - threshold;
   const scrollY = window.innerHeight + window.scrollY;
 
-  return scrollY >= divBottomY;
+  return scrollY >= bottomY;
 };
 
 const InfiniteScroll = (props: Props): JSX.Element => {
-  const { children, loadMore } = props;
+  const { children, loadMore, threshold = 0 } = props;
   const ref = useRef<HTMLDivElement>();
   const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.Idle);
 
   const scrollHandler = () => {
     if (loadingState !== LoadingState.Idle) { return; }
 
-    if (shouldLoad(ref.current)) {
+    if (shouldLoad(ref.current, threshold)) {
       setLoadingState(LoadingState.Loading);
       loadMore().then((isExhausted) => {
         const nextLoadingState = isExhausted ? LoadingState.Exhausted : LoadingState.Idle;

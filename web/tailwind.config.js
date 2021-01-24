@@ -3,7 +3,11 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: [
+    './components/*.tsx',
+    './pages/*.tsx',
+    './pages/**/*.tsx',
+  ],
   theme: {
     extend: {
       borderRadius: {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Post from './Post';
 import SiteLayout from './SiteLayout';
 import InfiniteScroll from './InfiniteScroll';
-import { SiteSettings, Post as PostModel } from '../../studio/models';
+import { SiteSettings, Post as PostModel } from '../lib/models';
 
 type Props = {
   settings: SiteSettings;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { MenuItem as Props } from '../../studio/models';
+import { MenuItem as Props } from '../lib/models';
 
 const MenuItem = (props: Props): JSX.Element => {
   const { title, url } = props;

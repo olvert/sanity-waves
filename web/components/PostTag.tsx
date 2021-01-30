@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Tag as Props } from '../../studio/models';
+import { Tag as Props } from '../lib/models';
 import { getTagPageHref } from '../lib/utils';
 
 const PostTag = (props: Props): JSX.Element => {

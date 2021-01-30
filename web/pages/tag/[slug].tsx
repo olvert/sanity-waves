@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 
 import { getTagPosts, getSiteSettings } from '../../lib/sanityQueries';
-import { SiteSettings, Post as PostModel } from '../../../studio/models';
+import { SiteSettings, Post as PostModel } from '../../lib/models';
 import PostPage from '../../components/PostPage';
 
 type Props = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import NextImage from 'next/image';
-import { Image } from '../../studio/models';
+import { Image } from '../lib/models';
 
 const ImageContent = (props: Image): JSX.Element => {
   const { url, metadata } = props.asset;

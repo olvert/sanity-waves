@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 
 import { getSiteSettings } from '../lib/sanityQueries';
-import { SiteSettings } from '../../studio/models';
+import { SiteSettings } from '../lib/models';
 import SiteLayout from '../components/SiteLayout';
 
 type Props = {

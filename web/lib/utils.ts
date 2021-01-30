@@ -1,5 +1,5 @@
 import { version } from '../package.json';
-import { Video } from '../../studio/models';
+import { Video } from './models';
 
 const prependZeroes = (s: string, length: number): string => `${'0'.repeat(length - s.length)}${s}`;
 

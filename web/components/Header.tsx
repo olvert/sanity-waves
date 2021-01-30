@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { SiteSettings } from '../../studio/models';
+import { SiteSettings } from '../lib/models';
 import MenuItem from './MenuItem';
 
 const Header = (props: SiteSettings): JSX.Element => {

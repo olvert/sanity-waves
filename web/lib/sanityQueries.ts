@@ -1,6 +1,6 @@
 import groq from 'groq';
 import sanityClient from './sanityClient';
-import { Post, SiteSettings, Tag } from '../../studio/models';
+import { Post, SiteSettings, Tag } from './models';
 
 const POSTS_PER_PAGE = 5;
 

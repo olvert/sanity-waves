@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 
 import SiteLayout from '../components/SiteLayout';
 import { getSiteSettings, getTags } from '../lib/sanityQueries';
-import { SiteSettings, Tag } from '../../studio/models';
+import { SiteSettings, Tag } from '../lib/models';
 import { getTagPageHref } from '../lib/utils';
 
 type Props = {

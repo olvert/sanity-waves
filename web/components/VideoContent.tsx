@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NextImage from 'next/image';
-import { Video } from '../../studio/models';
+import { Video } from '../lib/models';
 import { getYoutubeEmbedUrl, getYoutubeThumbnailUrl } from '../lib/utils';
 
 const renderThumbnail = (videoId: string, activate: () => void): JSX.Element => {

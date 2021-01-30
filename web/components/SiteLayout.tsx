@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { SiteSettings } from '../../studio/models';
+import { SiteSettings } from '../lib/models';
 import { getVersion } from '../lib/utils';
 import Header from './Header';
 

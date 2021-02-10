@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  next-waves:
+    image: olvert/next-waves
+    environment:
+      - VIRTUAL_HOST=next-waves.local
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: 
+      name: nginx-proxy

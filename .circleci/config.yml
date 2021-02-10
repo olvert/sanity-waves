@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/project/web
     environment:
       IMAGE_NAME: olvert/next-waves
     docker:

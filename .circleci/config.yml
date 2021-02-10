@@ -9,7 +9,8 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           name: Build Docker image
           command: docker build -t $IMAGE_NAME:latest .

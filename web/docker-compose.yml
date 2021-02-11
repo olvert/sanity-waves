@@ -4,7 +4,7 @@ services:
   next-waves:
     image: olvert/next-waves
     environment:
-      - VIRTUAL_HOST=next-waves.local
+      - VIRTUAL_HOST=dev.waves.olle.io
     networks:
       - proxy-net
 

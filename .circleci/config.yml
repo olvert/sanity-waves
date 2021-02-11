@@ -59,6 +59,10 @@ jobs:
       - run:
           name: Copy compose file to deploy server
           command: scp /tmp/workspace/docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+      - run:
+          name: Pull new image and restart
+          command:  ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && docker-compose pull && docker-compose up -d"
+
 
 
 workflows:

@@ -51,8 +51,8 @@ jobs:
           at: /tmp/workspace
       - add_ssh_keys
       - run:
-          name: Add the keys to the known hostsz
-          command: ssh-keyscan -H ${DEPLOY_HOST} >> /root/.ssh/known_hosts
+          name: Update known hosts
+          command: ssh-keyscan -H ${DEPLOY_HOST} >> ~/.ssh/known_hosts
       - run:
           name: Create directory on deploy server
           command: ssh $DEPLOY_USER@$DEPLOY_HOST "mkdir -p $DEPLOY_PATH"

@@ -44,6 +44,8 @@ jobs:
             docker push $IMAGE_NAME:latest
 
   deploy:
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
       - attach_workspace:
           at: /tmp/workspace

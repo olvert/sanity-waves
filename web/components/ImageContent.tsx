@@ -10,6 +10,7 @@ const ImageContent = (props: Image): JSX.Element => {
     src={url}
     width={width}
     height={height}
+    alt=""
   />;
 };
 

@@ -19,7 +19,7 @@ module.exports = {
         circle: '50%',
       },
       colors: {
-        grayish: '#999999',
+        grayish: '#757575',
         blackish: '#333333',
       },
       fontFamily: {

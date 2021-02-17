@@ -15,7 +15,7 @@ const renderThumbnail = (videoId: string, activate: () => void): JSX.Element => 
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative z-10 bg-white rounded-circle p-3 sm:p-5 shadow-xl cursor-pointer">
-          <img className="w-3 h-3 sm:w-6 sm:h-6" src="/icons/play-solid.svg" style={{ paddingLeft: 2 }} />
+          <img className="w-3 h-3 sm:w-6 sm:h-6" width="24" height="24" src="/icons/play-solid.svg" style={{ paddingLeft: 2 }} />
         </div>
       </div>
     </div>

@@ -61,7 +61,7 @@ jobs:
           command: scp /tmp/workspace/docker-compose.yml $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
       - run:
           name: Prune system
-          command: ssh $DEPLOY_USER@$DEPLOY_HOST "docker system prune"
+          command: ssh $DEPLOY_USER@$DEPLOY_HOST "docker system prune -f"
       - run:
           name: Pull new image and restart
           command:  ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && docker-compose pull && docker-compose up -d"

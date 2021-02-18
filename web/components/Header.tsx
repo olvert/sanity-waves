@@ -9,7 +9,7 @@ const Header = (props: SiteSettings): JSX.Element => {
   return (
     <div>
       <Link href="/">
-        <a className="text-2xl sm:text-3xl inline-block -ml-1">
+        <a className="text-2xl sm:text-3xl sm:leading-normal inline-block -ml-1">
           {siteTitle}
         </a>
       </Link>

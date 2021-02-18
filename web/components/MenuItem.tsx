@@ -7,7 +7,7 @@ const MenuItem = (props: Props): JSX.Element => {
 
   return (
     <Link href={url}>
-      <a className="text-sm sm:text-base text-grayish hover:text-blackish mr-2 sm:mr-3">
+      <a className="text-sm sm:text-base sm:leading-normal text-grayish hover:text-blackish mr-2 sm:mr-3">
         {title}
       </a>
     </Link>

@@ -8,36 +8,35 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "test": "sanity check",
     "model-codegen": "npx sanity-codegen"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^2.0.1",
-    "@sanity/components": "^2.0.1",
-    "@sanity/core": "^2.0.1",
-    "@sanity/default-layout": "^2.0.1",
-    "@sanity/default-login": "^2.0.1",
-    "@sanity/desk-tool": "^2.0.1",
-    "@sanity/vision": "^2.0.1",
+    "@sanity/base": "^2.3.8",
+    "@sanity/components": "^2.2.6",
+    "@sanity/core": "^2.3.8",
+    "@sanity/default-layout": "^2.3.8",
+    "@sanity/default-login": "^2.2.6",
+    "@sanity/desk-tool": "^2.3.8",
+    "@sanity/vision": "^2.2.6",
     "prettier": "^2.2.1",
     "prop-types": "^15.6",
-    "react": "^16.2",
-    "react-dom": "^16.2",
-    "sanity-codegen": "^0.8.3"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sanity-codegen": "^0.9.1"
   },
   "devDependencies": {
-    "@types/node": "^14.11.8",
-    "@types/react": "^16.9.51",
-    "@typescript-eslint/eslint-plugin": "^4.4.0",
-    "@typescript-eslint/parser": "^4.4.0",
-    "eslint": "^7.10.0",
-    "eslint-config-airbnb": "^18.2.0",
+    "@types/node": "^14.14.29",
+    "@types/react": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-react": "^7.21.3",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "typescript": "^4.0.3"
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "typescript": "^4.1.5"
   }
 }

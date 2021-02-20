@@ -10,7 +10,7 @@ const Header = (props: SiteSettings): JSX.Element => {
     <div>
       <Link href="/">
         <a className="text-2xl sm:text-3xl sm:leading-normal inline-block -ml-1">
-          {siteTitle}
+          {`| ${siteTitle} |`}
         </a>
       </Link>
       <nav role="navigation" className="mt-2 sm:mt-3 mb-4 sm:mb-6 lg:mb-8">

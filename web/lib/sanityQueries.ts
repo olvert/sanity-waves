@@ -104,6 +104,18 @@ export const getSiteSettings = (): Promise<SiteSettings> => {
   return sanityClient.fetch(query);
 };
 
+export const getTag = (slug: string): Promise<Tag> => {
+  const query = groq`
+    *[_type == 'tag' && slug.current == $slug] {
+      title,
+      slug {
+        current
+      }
+    }[0]`;
+
+  return sanityClient.fetch(query, { slug });
+};
+
 export const getTags = (): Promise<Tag[]> => {
   const query = groq`
     *[_type == 'tag'] | order(title) {
@@ -117,7 +129,6 @@ export const getTags = (): Promise<Tag[]> => {
 };
 
 export const getLatestPostForOgImage = (): Promise<Post> => {
-
   const query = groq`
     *[_type == 'post'] {
       body[] {

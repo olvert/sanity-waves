@@ -28,6 +28,6 @@ export const getVersion = (): string => `v${version}`;
 export const getOgImageUrlFromPost = (post: Post): string => {
   const [content] = post.body;
   return isVideo(content) ? getYoutubeThumbnailUrl(content.videoId) : content.asset.url;
-}
+};
 
 export const getHost = (): string => process.env.NEXT_PUBLIC_HOST;

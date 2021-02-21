@@ -4,9 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getLatestPostForOgImage } from '../../lib/sanityQueries'
 import { getOgImageUrlFromPost } from '../../lib/utils';
 
-type Data = any;
-
-export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+export default async (req: NextApiRequest, res: NextApiResponse<Buffer>) => {
   const post = await getLatestPostForOgImage();
   const url = getOgImageUrlFromPost(post);
 

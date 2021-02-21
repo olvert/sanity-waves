@@ -97,7 +97,8 @@ export const getSiteSettings = (): Promise<SiteSettings> => {
         url
       },
       siteTitle,
-      playlistUrl
+      playlistUrl,
+      metaDescription
     } [0]`;
 
   return sanityClient.fetch(query);

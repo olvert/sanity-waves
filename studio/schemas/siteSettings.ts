@@ -29,6 +29,11 @@ export default {
       type: 'string',
     },
     {
+      name: 'metaDescription',
+      title: 'Meta description',
+      type: 'string',
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',

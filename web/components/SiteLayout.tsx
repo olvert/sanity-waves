@@ -11,13 +11,13 @@ type Props = {
 
 const SiteLayout = (props: Props): JSX.Element => {
   const { children, settings } = props;
-  const { siteTitle } = settings;
+  const { siteTitle, metaDescription } = settings;
 
   return (
     <React.Fragment>
       <Head>
         <title>{siteTitle}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content={metaDescription}></meta>
       </Head>
 
       <div className="container min-h-screen flex flex-col justify-between mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32">

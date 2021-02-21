@@ -29,6 +29,7 @@ export interface SiteSettings extends SanityDocument {
   _type: 'siteSettings';
   siteTitle?: string;
   playlistUrl?: string;
+  metaDescription?: string;
   menuItems?: Array<MenuItem>;
   publishedAt?: string;
 }

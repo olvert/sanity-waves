@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import React from 'react';
 import { SiteSettings } from '../lib/models';
-import { getVersion } from '../lib/utils';
+import { getHost, getVersion } from '../lib/utils';
 import Header from './Header';
 
 type Props = {
@@ -9,15 +10,32 @@ type Props = {
   settings: SiteSettings,
 }
 
+const renderMeta = (settings: SiteSettings, path: string): JSX.Element => {
+  const { metaDescription, siteTitle } = settings;
+  const host = getHost();
+
+  return (
+    <React.Fragment>
+      <title>{siteTitle}</title>
+      <meta name="description" content={metaDescription} />
+
+      <meta property="og:title" content={siteTitle} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={`${host}${path}`} />
+      <meta property="og:image" content={`${host}/api/ogimage`} />
+    </React.Fragment>
+  );
+};
+
 const SiteLayout = (props: Props): JSX.Element => {
   const { children, settings } = props;
-  const { siteTitle, metaDescription } = settings;
+  const router = useRouter();
 
   return (
     <React.Fragment>
       <Head>
-        <title>{siteTitle}</title>
-        <meta name="description" content={metaDescription}></meta>
+        {renderMeta(settings, router.asPath)}
       </Head>
 
       <div className="container min-h-screen flex flex-col justify-between mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32">

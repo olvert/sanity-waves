@@ -22,7 +22,7 @@ const TagsPage = (props: Props): JSX.Element => {
           <div key={t.slug.current}>
             <Link href={getTagPageHref(t.slug.current)}>
               <a className="border-transparent border-b-2 hover:border-blackish text-base sm:text-xl sm:leading-normal">
-                {t.title}
+                {t.title.toLocaleLowerCase()}
               </a>
             </Link>
           </div>

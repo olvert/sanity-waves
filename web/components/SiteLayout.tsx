@@ -33,6 +33,9 @@ const renderMeta = (settings: SiteSettings, router: NextRouter, tag?: Tag): JSX.
   const host = getHost();
 
   const metaTitle = parseMetaTitle(siteTitle, router.pathname, tag);
+  const metaOgImageUrl = tag !== undefined
+    ? `${host}/api/ogimage?tag=${tag.slug.current}`
+    : `${host}/api/ogimage`;
 
   return (
     <React.Fragment>
@@ -43,7 +46,7 @@ const renderMeta = (settings: SiteSettings, router: NextRouter, tag?: Tag): JSX.
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={`${host}${router.asPath}`} />
-      <meta property="og:image" content={`${host}/api/ogimage`} />
+      <meta property="og:image" content={metaOgImageUrl} />
     </React.Fragment>
   );
 };

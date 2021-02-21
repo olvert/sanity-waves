@@ -145,3 +145,21 @@ export const getLatestPostForOgImage = (): Promise<Post> => {
 
   return sanityClient.fetch(query, {});
 };
+
+export const getLatestTagPostForOgImage = (slug: string): Promise<Post> => {
+  const query = groq`
+    *[_type == 'post' && $slug in tags[]->slug.current] {
+      body[] {
+        _type == 'video' => {
+          videoId
+        },
+        _type == 'image' => {
+          asset-> {
+            url,
+          }
+        }
+      }
+    } | order(_createdAt desc) [0]`;
+
+  return sanityClient.fetch(query, { slug });
+};

@@ -115,3 +115,22 @@ export const getTags = (): Promise<Tag[]> => {
 
   return sanityClient.fetch(query);
 };
+
+export const getLatestPostForOgImage = (): Promise<Post> => {
+
+  const query = groq`
+    *[_type == 'post'] {
+      body[] {
+        _type == 'video' => {
+          videoId
+        },
+        _type == 'image' => {
+          asset-> {
+            url,
+          }
+        }
+      }
+    } | order(_createdAt desc) [0]`;
+
+  return sanityClient.fetch(query, {});
+};

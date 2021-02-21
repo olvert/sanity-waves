@@ -1,5 +1,5 @@
 import { version } from '../package.json';
-import { Video } from './models';
+import { Post, Video } from './models';
 
 const prependZeroes = (s: string, length: number): string => `${'0'.repeat(length - s.length)}${s}`;
 
@@ -24,3 +24,8 @@ export const isServer = (): boolean => typeof window === 'undefined';
 export const getTagPageHref = (slug: string): string => `/tag/${encodeURIComponent(slug)}`;
 
 export const getVersion = (): string => `v${version}`;
+
+export const getOgImageUrlFromPost = (post: Post): string => {
+  const [content] = post.body;
+  return isVideo(content) ? getYoutubeThumbnailUrl(content.videoId) : content.asset.url;
+}

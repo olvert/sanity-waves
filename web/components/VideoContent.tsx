@@ -12,6 +12,7 @@ const renderThumbnail = (videoId: string, activate: () => void): JSX.Element => 
         src={thumbnailUrl}
         width={1280}
         height={720}
+        layout="responsive"
         alt=""
       />
       <div className="absolute inset-0 flex items-center justify-center">

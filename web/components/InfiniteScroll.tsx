@@ -14,6 +14,8 @@ enum LoadingState {
 }
 
 const shouldLoad = (div: HTMLDivElement, threshold: number): boolean => {
+  if (div === null) { return false; }
+
   const bottomY = div.scrollHeight + div.offsetTop - threshold;
   const scrollY = window.innerHeight + window.scrollY;
 

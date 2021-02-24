@@ -18,7 +18,7 @@ const Post = (props: Props): JSX.Element => {
   } = props;
 
   return (
-    <article className="w-full inline-block mb-3 sm:mb-4 lg:mb-6">
+    <article data-aos="fade" className="w-full inline-block mb-3 sm:mb-4 lg:mb-6">
       { body.map((content) => (
         isVideo(content)
           ? <VideoContent key={content._key} {...content} />

@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import AOS, { AosOptions } from 'aos';
+
+import 'aos/dist/aos.css';
 
 import Post from './Post';
 import SiteLayout from './SiteLayout';
@@ -15,6 +18,15 @@ type Props = {
 const PostPage = (props: Props): JSX.Element => {
   const { initialPosts, getPosts, ...rest } = props;
   const [posts, setPosts] = useState<PostModel[]>(initialPosts);
+
+  const options: AosOptions = {
+    duration: 300,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 60,
+  };
+
+  useEffect(() => AOS.init(options), []);
 
   const loadMorePosts = async (): Promise<boolean> => {
     const offset = posts.length;

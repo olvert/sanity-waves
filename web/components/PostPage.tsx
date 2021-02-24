@@ -27,6 +27,7 @@ const PostPage = (props: Props): JSX.Element => {
   };
 
   useEffect(() => AOS.init(options), []);
+  useEffect(() => setPosts(initialPosts), [initialPosts]);
 
   const loadMorePosts = async (): Promise<boolean> => {
     const offset = posts.length;

@@ -11,31 +11,48 @@ type Props = {
   tag?: Tag;
 }
 
-const getMetaTitleWithPageName = (siteTitle: string, pageTitle?: string): string => `${pageTitle} — ${siteTitle}`;
+type Meta = {
+  pageName: string;
+  imageUrl: string;
+  pageUrl: string;
+}
 
-const parseMetaTitle = (siteTitle: string, pathName: string, tag?: Tag): string => {
+const parsePageName = (pathName: string, tag?: Tag): string => {
   switch (pathName) {
     case '/tags':
-      return getMetaTitleWithPageName(siteTitle, 'Tags');
+      return 'Tags';
     case '/playlist':
-      return getMetaTitleWithPageName(siteTitle, 'Playlist');
+      return 'Playlist';
     case '/tag/[slug]':
-      return getMetaTitleWithPageName(siteTitle, tag.title);
+      return tag.title;
     case '/':
-      return siteTitle;
+      return '';
     default:
-      return siteTitle;
+      return '';
   }
 };
 
-const renderMeta = (settings: SiteSettings, router: NextRouter, tag?: Tag): JSX.Element => {
-  const { metaDescription, siteTitle } = settings;
+const parseMeta = (router: NextRouter, tag?: Tag): Meta => {
+  const { pathname, asPath } = router;
   const host = getHost();
-
-  const metaTitle = parseMetaTitle(siteTitle, router.pathname, tag);
-  const metaOgImageUrl = tag !== undefined
+  const pageName = parsePageName(pathname, tag);
+  const pageUrl = `${host}${asPath}`;
+  const imageUrl = tag !== undefined
     ? `${host}/api/ogimage?tag=${tag.slug.current}`
     : `${host}/api/ogimage`;
+
+  return {
+    pageName,
+    imageUrl,
+    pageUrl,
+  };
+};
+
+const renderMeta = (settings: SiteSettings, meta: Meta): JSX.Element => {
+  const { metaDescription, siteTitle } = settings;
+  const { pageName, pageUrl, imageUrl } = meta;
+
+  const metaTitle = pageName !== '' ? `${pageName} — ${siteTitle}` : siteTitle;
 
   return (
     <React.Fragment>
@@ -45,8 +62,8 @@ const renderMeta = (settings: SiteSettings, router: NextRouter, tag?: Tag): JSX.
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${host}${router.asPath}`} />
-      <meta property="og:image" content={metaOgImageUrl} />
+      <meta property="og:url" content={pageUrl} />
+      <meta property="og:image" content={imageUrl} />
     </React.Fragment>
   );
 };
@@ -54,16 +71,17 @@ const renderMeta = (settings: SiteSettings, router: NextRouter, tag?: Tag): JSX.
 const SiteLayout = (props: Props): JSX.Element => {
   const { children, settings, tag } = props;
   const router = useRouter();
+  const meta = parseMeta(router, tag);
 
   return (
     <React.Fragment>
       <Head>
-        {renderMeta(settings, router, tag)}
+        {renderMeta(settings, meta)}
       </Head>
 
       <div className="container min-h-screen flex flex-col justify-between mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32">
         <main className="pt-4 sm:pt-6 xl:pt-10">
-          <Header {...settings} />
+          <Header {...meta} {...settings} />
           { children }
         </main>
 

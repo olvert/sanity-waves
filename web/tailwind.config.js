@@ -23,8 +23,8 @@ module.exports = {
         blackish: '#333333',
       },
       fontFamily: {
-        futura: [
-          'Futura',
+        'apfel-grotezk': [
+          'ApfelGrotezk',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',

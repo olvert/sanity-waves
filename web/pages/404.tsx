@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import React from 'react';
 import PageMessage from '../components/PageMessage';
 import SiteLayout from '../components/SiteLayout';
@@ -19,7 +19,7 @@ const Custom404 = (props: Props): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const settings = await getSiteSettings();
 
   return {

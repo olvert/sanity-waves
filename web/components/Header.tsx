@@ -27,6 +27,7 @@ const Header = (props: Props): JSX.Element => {
           </a>
         </Link>
         <button
+          className="pl-12"
           onMouseEnter={() => setIsHoveringButton(true)}
           onMouseLeave={() => setIsHoveringButton(false)}
         >

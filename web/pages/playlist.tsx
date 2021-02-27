@@ -18,7 +18,7 @@ const Playlist = (props: Props): JSX.Element => {
       <div className="aspect-ratio ar-16-9 bg-black cursor-pointer">
         <iframe
           src={playlistUrl}
-          className="absolute top-0 left-0 w-full h-full z-20"
+          className="absolute top-0 left-0 w-full h-full z-10"
           frameBorder="0"
           allowFullScreen
         />

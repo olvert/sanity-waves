@@ -21,14 +21,14 @@ const Header = (props: Props): JSX.Element => {
 
   return (
     <div className="sticky top-0 z-30">
-      <div className="bg-white relative z-30 flex justify-between items-center">
+      <div className="bg-white relative z-30 flex justify-between items-center py-1">
         <Link href="/">
           <a className="text-2xl sm:text-4xl sm:leading-normal inline-block">
             {pageTitle}
           </a>
         </Link>
         <button
-          className="pl-12"
+          className="focus:outline-none pl-0 sm:pl-12"
           onMouseEnter={() => setIsHoveringButton(true)}
           onMouseLeave={() => setIsHoveringButton(false)}
           onClick={() => {
@@ -37,7 +37,7 @@ const Header = (props: Props): JSX.Element => {
             setIsHoveringNav(!isOpen);
           }}
         >
-          <MenuIcon className="w-10 h-10 mt-2" />
+          <MenuIcon className="w-8 h-8 sm:w-10 sm:h-10 -mb-1 sm:-mb-2" />
         </button>
       </div>
       <nav

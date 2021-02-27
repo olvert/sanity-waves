@@ -23,12 +23,12 @@ const Header = (props: Props): JSX.Element => {
     <div className="sticky top-0 z-30">
       <div className="bg-white relative z-30 flex justify-between items-center py-1">
         <Link href="/">
-          <a className="text-2xl sm:text-4xl sm:leading-normal inline-block">
+          <a className="text-2xl sm:text-4xl sm:leading-normal inline-block flex-auto overflow-ellipsis overflow-hidden whitespace-nowrap">
             {pageTitle}
           </a>
         </Link>
         <button
-          className="focus:outline-none pl-0 sm:pl-12"
+          className="focus:outline-none pl-6 sm:pl-12 flex-none"
           onMouseEnter={() => setIsHoveringButton(true)}
           onMouseLeave={() => setIsHoveringButton(false)}
           onClick={() => {

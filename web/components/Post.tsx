@@ -26,7 +26,7 @@ const Post = (props: Props): JSX.Element => {
           : <ImageContent key={content._key} {...content} />
       ))}
 
-      <div className="flex justify-between mt-1 text-xxs sm:text-base">
+      <div className="flex justify-between mt-1 text-xs sm:text-base">
         <div className="flex-grow">
           { hideTitle === false && <span>{title} {titleSeparator}</span> }
           { tags.map((tag, i) => (

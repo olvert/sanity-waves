@@ -52,6 +52,7 @@ const Header = (props: Props): JSX.Element => {
       >
         { menuItems.map((mi) => <MenuItem key={mi.title} {...mi} />)}
       </nav>
+      <div className="w-full h-32 bg-white absolute top-0 transform -translate-y-full z-20" />
     </div>
   );
 };

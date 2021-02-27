@@ -7,7 +7,7 @@ import Post from './Post';
 import SiteLayout from './SiteLayout';
 import InfiniteScroll from './InfiniteScroll';
 import { SiteSettings, Post as PostModel, Tag } from '../lib/models';
-import EmptyMessage from './EmptyMessage';
+import PageMessage from './PageMessage';
 
 type Props = {
   settings: SiteSettings;
@@ -43,7 +43,7 @@ const PostPage = (props: Props): JSX.Element => {
   if (posts.length === 0) {
     return (
       <SiteLayout {...rest}>
-        <EmptyMessage />
+        <PageMessage message={'Empty. There are no posts to show.'} />
       </SiteLayout>
     );
   }

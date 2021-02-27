@@ -26,6 +26,8 @@ const parsePageName = (pathName: string, tag?: Tag): string => {
       return 'Playlist';
     case '/tag/[slug]':
       return tag.title;
+    case '/404':
+      return '404';
     case '/':
       return '';
     default:

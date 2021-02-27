@@ -45,7 +45,7 @@ const Header = (props: Props): JSX.Element => {
         onMouseEnter={() => setIsHoveringNav(true)}
         onMouseLeave={() => setIsHoveringNav(false)}
         className={classNames(
-          'absolute inset-x-0 z-20 text-right pb-2 bg-white transform transition-transform duration-100 ease-out delay-100',
+          'absolute inset-x-0 z-20 text-right pb-2 bg-white transform transition-transform duration-100 ease-out delay-100 flex flex-col items-end sm:block',
           { '-translate-y-full': showNav() === false },
           { '-translate-y-0.5': showNav() === true },
         )}

@@ -1,7 +1,7 @@
 import { version } from '../package.json';
 import { Post, Video } from './models';
 
-const prependZeroes = (s: string, length: number): string => `${'0'.repeat(length - s.length)}${s}`;
+const prependZeroes = (s: string, length: number): string => `${'0'.repeat(Math.max(length - s.length, 0))}${s}`;
 
 export const isVideo = (value: unknown): value is Video => (value as Video).videoId !== undefined;
 
@@ -11,11 +11,11 @@ export const getYoutubeEmbedUrl = (id: string): string => `https://www.youtube.c
 export const formatDate = (dateString: string): string => {
   const d = new Date(dateString);
 
-  const year = d.getFullYear().toString().substr(2);
+  const year = d.getFullYear().toString();
   const month = (d.getMonth() + 1).toString();
   const day = d.getDate().toString();
 
-  return `${prependZeroes(day, 2)}/${prependZeroes(month, 2)}/${prependZeroes(year, 2)}`;
+  return `${prependZeroes(year, 4)}-${prependZeroes(month, 2)}-${prependZeroes(day, 2)}`;
 };
 
 export const isClient = (): boolean => typeof window !== 'undefined';

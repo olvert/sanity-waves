@@ -30,6 +30,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     initialPostsPromise,
   ]);
 
+  if (tag === null) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       settings,

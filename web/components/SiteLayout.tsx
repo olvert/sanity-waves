@@ -1,8 +1,9 @@
 import { NextRouter, useRouter } from 'next/router';
 import Head from 'next/head';
 import React from 'react';
+import classNames from 'classnames';
 import { SiteSettings, Tag } from '../lib/models';
-import { getHost, getVersion } from '../lib/utils';
+import { getHost, getVersion, getWrapperStyles } from '../lib/utils';
 import Header from './Header';
 
 type Props = {
@@ -79,7 +80,7 @@ const SiteLayout = (props: Props): JSX.Element => {
         {renderMeta(settings, meta)}
       </Head>
 
-      <div className="container min-h-screen flex flex-col justify-between mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32">
+      <div className={classNames('min-h-screen flex flex-col justify-between', getWrapperStyles())}>
         <main className="pt-4 sm:pt-6 xl:pt-10">
           <Header {...meta} {...settings} />
           { children }

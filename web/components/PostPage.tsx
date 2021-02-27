@@ -7,6 +7,7 @@ import Post from './Post';
 import SiteLayout from './SiteLayout';
 import InfiniteScroll from './InfiniteScroll';
 import { SiteSettings, Post as PostModel, Tag } from '../lib/models';
+import EmptyMessage from './EmptyMessage';
 
 type Props = {
   settings: SiteSettings;
@@ -38,6 +39,14 @@ const PostPage = (props: Props): JSX.Element => {
 
     return newPosts.length === 0;
   };
+
+  if (posts.length === 0) {
+    return (
+      <SiteLayout {...rest}>
+        <EmptyMessage />
+      </SiteLayout>
+    );
+  }
 
   return (
     <SiteLayout {...rest}>

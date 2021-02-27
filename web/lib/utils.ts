@@ -31,3 +31,5 @@ export const getOgImageUrlFromPost = (post: Post): string => {
 };
 
 export const getHost = (): string => process.env.NEXT_PUBLIC_HOST;
+
+export const getWrapperStyles = (): string => 'container mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32';

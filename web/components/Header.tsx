@@ -15,8 +15,9 @@ const Header = (props: Props): JSX.Element => {
 
   const [isHoveringButton, setIsHoveringButton] = useState(false);
   const [isHoveringNav, setIsHoveringNav] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const showNav = () => isHoveringNav || isHoveringButton;
+  const showNav = () => isHoveringNav || isHoveringButton || isOpen;
 
   return (
     <div className="sticky top-0 z-30">
@@ -30,6 +31,11 @@ const Header = (props: Props): JSX.Element => {
           className="pl-12"
           onMouseEnter={() => setIsHoveringButton(true)}
           onMouseLeave={() => setIsHoveringButton(false)}
+          onClick={() => {
+            setIsOpen(!isOpen);
+            setIsHoveringButton(!isOpen);
+            setIsHoveringNav(!isOpen);
+          }}
         >
           <MenuIcon className="w-10 h-10 mt-2" />
         </button>

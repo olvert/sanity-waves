@@ -9,7 +9,7 @@ const PostTag = (props: Props): JSX.Element => {
   return (
     <Link href={getTagPageHref(slug.current)}>
       <a className="border-b border-transparent hover:border-blackish">
-        {title.toLowerCase()}
+        {title}
       </a>
     </Link>
   );

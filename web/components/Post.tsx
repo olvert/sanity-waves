@@ -6,7 +6,8 @@ import ImageContent from './ImageContent';
 import PostTag from './PostTag';
 import VideoContent from './VideoContent';
 
-const separator = ' / ';
+const titleSeparator = ' — ';
+const tagSeparator = ' / ';
 
 const Post = (props: Props): JSX.Element => {
   const {
@@ -25,13 +26,13 @@ const Post = (props: Props): JSX.Element => {
           : <ImageContent key={content._key} {...content} />
       ))}
 
-      <div className="flex justify-between mt-1 text-xxs sm:text-xs">
+      <div className="flex justify-between mt-1 text-xxs sm:text-base">
         <div className="flex-grow">
-        { hideTitle === false && <span className="text-grayish">{title} {separator}</span> }
+          { hideTitle === false && <span>{title} {titleSeparator}</span> }
           { tags.map((tag, i) => (
             <Fragment key={tag.slug.current}>
               <PostTag {...tag} />
-              { i < tags.length - 1 && separator}
+              { i < tags.length - 1 && tagSeparator}
             </Fragment>
           ))}
         </div>

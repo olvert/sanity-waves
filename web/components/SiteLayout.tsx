@@ -86,7 +86,7 @@ const SiteLayout = (props: Props): JSX.Element => {
         </main>
 
         <footer className="my-2">
-          <p className="text-grayish text-center text-xxs sm:text-xs">
+          <p className="text-center text-xs sm:text-base">
             {getVersion()}
           </p>
         </footer>

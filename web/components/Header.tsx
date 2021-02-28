@@ -36,6 +36,7 @@ const Header = (props: Props): JSX.Element => {
             setIsHoveringButton(!isOpen);
             setIsHoveringNav(!isOpen);
           }}
+          aria-label="toggle menu"
         >
           <MenuIcon className="w-8 h-8 sm:w-10 sm:h-10 -mb-1 sm:-mb-2" />
         </button>

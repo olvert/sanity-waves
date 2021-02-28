@@ -28,6 +28,8 @@ const parsePageName = (pathName: string, tag?: Tag): string => {
       return tag.title;
     case '/404':
       return '404';
+    case '/_error':
+      return 'Error';
     case '/':
       return '';
     default:

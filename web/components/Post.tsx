@@ -20,7 +20,7 @@ const Post = (props: Props): JSX.Element => {
 
   return (
     <article data-aos="fade" className="w-full inline-block mb-3 sm:mb-4 lg:mb-6">
-      { body.map((content) => (
+      { body && body.map((content) => (
         isVideo(content)
           ? <VideoContent key={content._key} {...content} />
           : <ImageContent key={content._key} {...content} />
@@ -29,10 +29,10 @@ const Post = (props: Props): JSX.Element => {
       <div className="flex justify-between mt-1 text-xs sm:text-base">
         <div className="flex-grow">
           { hideTitle === false && <span>{title} {titleSeparator}</span> }
-          { tags.map((tag, i) => (
+          { tags && tags.map((tag, i) => (
             <Fragment key={tag.slug.current}>
               <PostTag {...tag} />
-              { i < tags.length - 1 && tagSeparator}
+              { i < tags.length - 1 && tagSeparator }
             </Fragment>
           ))}
         </div>

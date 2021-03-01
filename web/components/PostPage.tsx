@@ -50,7 +50,7 @@ const PostPage = (props: Props): JSX.Element => {
 
   return (
     <SiteLayout {...rest}>
-      <InfiniteScroll loadMore={loadMorePosts} threshold={300}>
+      <InfiniteScroll loadMore={loadMorePosts} threshold={600}>
         { posts.map((post) => <Post key={post.slug ? post.slug.current : ''} {...post} />) }
       </InfiniteScroll>
     </SiteLayout>

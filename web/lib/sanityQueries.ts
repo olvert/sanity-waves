@@ -2,7 +2,7 @@ import groq from 'groq';
 import sanityClient from './sanityClient';
 import { Post, SiteSettings, Tag } from './models';
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 10;
 
 export const getPosts = (offset: number): Promise<Post[]> => {
   const start = offset;

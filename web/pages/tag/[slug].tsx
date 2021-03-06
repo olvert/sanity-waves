@@ -1,7 +1,12 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next';
 
-import { getTagPosts, getSiteSettings, getTag } from '../../lib/sanityQueries';
+import {
+  getTagPosts,
+  getSiteSettings,
+  getTag,
+  getTags,
+} from '../../lib/sanityQueries';
 import { SiteSettings, Post as PostModel, Tag } from '../../lib/models';
 import PostPage from '../../components/PostPage';
 
@@ -11,13 +16,21 @@ type Props = {
   tag: Tag;
 }
 
+type Path = {
+  params: {
+    slug: string;
+  }
+}
+
+const tagToPath = (t: Tag): Path => ({ params: { slug: t.slug.current } });
+
 const Home = (props: Props): JSX.Element => {
   const { tag } = props;
   const getPosts = (offset: number) => getTagPosts(tag.slug.current, offset);
   return <PostPage getPosts={getPosts} {...props} />;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { slug = '' } = context.params;
 
   const settingsPromise = getSiteSettings();
@@ -33,6 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (tag === null) {
     return {
       notFound: true,
+      revalidate: 1,
     };
   }
 
@@ -42,6 +56,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       initialPosts,
       tag,
     },
+    revalidate: 1,
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const tags = await getTags();
+
+  return {
+    paths: tags.filter((t) => t.slug !== undefined).map(tagToPath),
+    fallback: 'blocking',
   };
 };
 

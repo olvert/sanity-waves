@@ -24,11 +24,7 @@ type Path = {
 
 const tagToPath = (t: Tag): Path => ({ params: { slug: t.slug.current } });
 
-const Home = (props: Props): JSX.Element => {
-  const { tag } = props;
-  const getPosts = (offset: number) => getTagPosts(tag.slug.current, offset);
-  return <PostPage getPosts={getPosts} {...props} />;
-};
+const TagPostPage = (props: Props): JSX.Element => <PostPage {...props} />;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug = '' } = context.params;
@@ -69,4 +65,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default Home;
+export default TagPostPage;

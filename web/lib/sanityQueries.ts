@@ -2,11 +2,11 @@ import groq from 'groq';
 import sanityClient from './sanityClient';
 import { Post, SiteSettings, Tag } from './models';
 
-const POSTS_PER_PAGE = 10;
+export const PAGE_SIZE = 10;
 
-export const getPosts = (offset: number): Promise<Post[]> => {
-  const start = offset;
-  const end = offset + POSTS_PER_PAGE;
+export const getPosts = (index: number): Promise<Post[]> => {
+  const start = index * PAGE_SIZE;
+  const end = (index + 1) * PAGE_SIZE;
 
   const query = groq`
     *[_type == 'post'] {
@@ -46,9 +46,9 @@ export const getPosts = (offset: number): Promise<Post[]> => {
   });
 };
 
-export const getTagPosts = (slug: string, offset: number): Promise<Post[]> => {
-  const start = offset;
-  const end = offset + POSTS_PER_PAGE;
+export const getTagPosts = (slug: string, index: number): Promise<Post[]> => {
+  const start = index * PAGE_SIZE;
+  const end = (index + 1) * PAGE_SIZE;
 
   const query = groq`
     *[_type == 'post' && $slug in tags[]->slug.current] {

@@ -1,58 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AOS, { AosOptions } from 'aos';
+import { useSWRInfinite } from 'swr';
 
 import 'aos/dist/aos.css';
 
 import Post from './Post';
 import SiteLayout from './SiteLayout';
-import InfiniteScroll from './InfiniteScroll';
 import { SiteSettings, Post as PostModel, Tag } from '../lib/models';
 import PageMessage from './PageMessage';
+import { getPosts, getTagPosts } from '../lib/sanityQueries';
 
 type Props = {
   settings: SiteSettings;
   initialPosts: PostModel[];
   tag?: Tag;
-  getPosts: (offset: number) => Promise<PostModel[]>;
 }
 
+const aosOptions: AosOptions = {
+  duration: 300,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 60,
+};
+
 const PostPage = (props: Props): JSX.Element => {
-  const { initialPosts, getPosts, ...rest } = props;
-  const [posts, setPosts] = useState<PostModel[]>(initialPosts);
+  const { initialPosts, tag, ...rest } = props;
 
-  const options: AosOptions = {
-    duration: 300,
-    easing: 'ease-out-cubic',
-    once: true,
-    offset: 60,
-  };
+  const baseKey = tag === undefined ? 'posts:index' : `posts:${tag.slug.current}`;
+  const getKey = (index, prevData) => (prevData && !prevData.length ? null : [baseKey, index]);
 
-  useEffect(() => AOS.init(options), []);
-  useEffect(() => setPosts(initialPosts), [initialPosts]);
+  const fetcher = tag === undefined
+    ? (key, index) => getPosts(index)
+    : (key, index) => getTagPosts(tag.slug.current, index);
 
-  const loadMorePosts = async (): Promise<boolean> => {
-    const offset = posts.length;
+  const { data, size, setSize } = useSWRInfinite<PostModel[]>(
+    getKey,
+    fetcher,
+    { initialData: [initialPosts] },
+  );
 
-    const newPosts = await getPosts(offset);
+  useEffect(() => AOS.init(aosOptions), []);
 
-    setPosts([...posts, ...newPosts]);
-
-    return newPosts.length === 0;
-  };
-
-  if (posts.length === 0) {
+  if (data && data.length === 0) {
     return (
-      <SiteLayout {...rest}>
+      <SiteLayout tag={tag} {...rest}>
         <PageMessage message={'Empty. There are no posts to show.'} />
       </SiteLayout>
     );
   }
 
   return (
-    <SiteLayout {...rest}>
-      <InfiniteScroll loadMore={loadMorePosts} threshold={600}>
-        { posts.map((post) => <Post key={post.slug ? post.slug.current : ''} {...post} />) }
-      </InfiniteScroll>
+    <SiteLayout tag={tag} {...rest}>
+      { data && data.flat(1).map((post) => <Post key={post.slug ? post.slug.current : ''} {...post} />) }
+      <button onClick={() => setSize(size + 1)}>Load more</button>
     </SiteLayout>
   );
 };

@@ -10,7 +10,7 @@ type Props = {
   initialPosts: PostModel[];
 }
 
-const Home = (props: Props): JSX.Element => <PostPage getPosts={getPosts} {...props} />;
+const Home = (props: Props): JSX.Element => <PostPage {...props} />;
 
 export const getStaticProps: GetStaticProps = async () => {
   const settingsPromise = getSiteSettings();

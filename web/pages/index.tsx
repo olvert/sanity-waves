@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import { getPosts, getSiteSettings } from '../lib/sanityQueries';
 import { SiteSettings, Post as PostModel } from '../lib/models';
@@ -12,7 +12,7 @@ type Props = {
 
 const Home = (props: Props): JSX.Element => <PostPage getPosts={getPosts} {...props} />;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const settingsPromise = getSiteSettings();
   const initialPostsPromise = getPosts(0);
 
@@ -23,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       settings,
       initialPosts,
     },
+    revalidate: 1,
   };
 };
 

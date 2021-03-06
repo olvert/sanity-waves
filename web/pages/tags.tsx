@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import SiteLayout from '../components/SiteLayout';
 import { getSiteSettings, getTags } from '../lib/sanityQueries';
@@ -32,7 +32,7 @@ const TagsPage = (props: Props): JSX.Element => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const settingsPromise = getSiteSettings();
   const tagsPromise = getTags();
 
@@ -43,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       settings,
       tags,
     },
+    revalidate: 1,
   };
 };
 

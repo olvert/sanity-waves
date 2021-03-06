@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import { getSiteSettings } from '../lib/sanityQueries';
 import { SiteSettings } from '../lib/models';
@@ -27,13 +27,14 @@ const Playlist = (props: Props): JSX.Element => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const settings = await getSiteSettings();
 
   return {
     props: {
       settings,
     },
+    revalidate: 1,
   };
 };
 

@@ -8,7 +8,8 @@ import Post from './Post';
 import SiteLayout from './SiteLayout';
 import { SiteSettings, Post as PostModel, Tag } from '../lib/models';
 import PageMessage from './PageMessage';
-import { getPosts, getTagPosts } from '../lib/sanityQueries';
+import { getPosts, getTagPosts, PAGE_SIZE } from '../lib/sanityQueries';
+import InfiniteScroll from './InfiniteScroll';
 
 type Props = {
   settings: SiteSettings;
@@ -39,6 +40,10 @@ const PostPage = (props: Props): JSX.Element => {
     { initialData: [initialPosts] },
   );
 
+  const isLoadingMore = size > 0 && data && typeof data[size - 1] === 'undefined';
+  const isEmpty = data?.[0]?.length === 0;
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
+
   useEffect(() => AOS.init(aosOptions), []);
 
   if (data && data.length === 0) {
@@ -51,8 +56,13 @@ const PostPage = (props: Props): JSX.Element => {
 
   return (
     <SiteLayout tag={tag} {...rest}>
-      { data && data.flat(1).map((post) => <Post key={post.slug ? post.slug.current : ''} {...post} />) }
-      <button onClick={() => setSize(size + 1)}>Load more</button>
+      <InfiniteScroll
+        isDisabled={isLoadingMore || isReachingEnd}
+        loadMore={() => setSize(size + 1)}
+        threshold={600}
+      >
+        { data && data.flat(1).map((post) => <Post key={post.slug ? post.slug.current : ''} {...post} />) }
+      </InfiniteScroll>
     </SiteLayout>
   );
 };

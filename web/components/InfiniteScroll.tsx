@@ -1,66 +1,36 @@
-import React, { useEffect, useState, useRef } from 'react';
-import _ from 'lodash';
+import React from 'react';
+import { InView } from 'react-intersection-observer';
 
 type Props = {
   children: React.ReactNode;
-  loadMore: () => Promise<boolean>;
+  isDisabled: boolean;
+  loadMore: () => void;
   threshold?: number;
 }
 
-enum LoadingState {
-  Idle,
-  Loading,
-  Exhausted
-}
-
-const shouldLoad = (div: HTMLDivElement, threshold: number): boolean => {
-  if (div === null) { return false; }
-
-  const bottomY = div.scrollHeight + div.offsetTop - threshold;
-  const scrollY = window.innerHeight + window.scrollY;
-
-  return scrollY >= bottomY;
-};
-
 const InfiniteScroll = (props: Props): JSX.Element => {
-  const { children, loadMore, threshold = 0 } = props;
-  const ref = useRef<HTMLDivElement>();
-  const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.Idle);
+  const {
+    children,
+    isDisabled,
+    loadMore,
+    threshold,
+  } = props;
 
-  const scrollHandler = () => {
-    if (loadingState !== LoadingState.Idle) { return; }
-    if (shouldLoad(ref.current, threshold) === false) { return; }
-
-    setLoadingState(LoadingState.Loading);
-    loadMore().then((isExhausted) => {
-      const nextLoadingState = isExhausted ? LoadingState.Exhausted : LoadingState.Idle;
-      setLoadingState(nextLoadingState);
-    });
+  const onChange = (inView: boolean) => {
+    if (inView && !isDisabled) {
+      loadMore();
+    }
   };
 
-  const throttledScrollHandler = _.throttle(scrollHandler, 400);
-
-  const addListener = () => window.addEventListener('scroll', throttledScrollHandler, { passive: true });
-  const removeListener = () => window.removeEventListener('scroll', throttledScrollHandler);
-
-  useEffect(() => {
-    switch (loadingState) {
-      case LoadingState.Exhausted:
-        removeListener();
-        break;
-      default:
-        addListener();
-        break;
-    }
-
-    throttledScrollHandler();
-
-    return removeListener;
-  });
-
   return (
-    <div ref={ref}>
+    <div>
       { children }
+      <InView
+        as="div"
+        onChange={onChange}
+        rootMargin={threshold ? `0px 0px ${threshold}px 0px` : '0px'}
+      >
+      </InView>
     </div>
   );
 };

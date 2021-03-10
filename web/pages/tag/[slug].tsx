@@ -9,6 +9,7 @@ import {
 } from '../../lib/sanityQueries';
 import { SiteSettings, Post as PostModel, Tag } from '../../lib/models';
 import PostPage from '../../components/PostPage';
+import { unwrap } from '../../lib/utils';
 
 type Props = {
   settings: SiteSettings;
@@ -29,9 +30,11 @@ const TagPostPage = (props: Props): JSX.Element => <PostPage {...props} />;
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug = '' } = context.params;
 
+  const unwrappedSlug = unwrap<string>(slug);
+
   const settingsPromise = getSiteSettings();
-  const tagPromise = getTag(slug as string);
-  const initialPostsPromise = getTagPosts(slug as string, 0);
+  const tagPromise = getTag(unwrappedSlug);
+  const initialPostsPromise = getTagPosts(unwrappedSlug, 0);
 
   const [settings, tag, initialPosts] = await Promise.all([
     settingsPromise,

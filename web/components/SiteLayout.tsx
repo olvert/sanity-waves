@@ -3,13 +3,14 @@ import Head from 'next/head';
 import React from 'react';
 import classNames from 'classnames';
 import { SiteSettings, Tag } from '../lib/models';
-import { getHost, getVersion, getWrapperStyles } from '../lib/utils';
 import Header from './Header';
+import { getHost, getVersion } from '../lib/utils';
 
 type Props = {
   children: React.ReactNode;
   settings: SiteSettings;
   tag?: Tag;
+  flexMain?: boolean;
 }
 
 type Meta = {
@@ -74,7 +75,12 @@ const renderMeta = (settings: SiteSettings, meta: Meta): JSX.Element => {
 };
 
 const SiteLayout = (props: Props): JSX.Element => {
-  const { children, settings, tag } = props;
+  const {
+    children,
+    settings,
+    tag,
+    flexMain,
+  } = props;
   const router = useRouter();
   const meta = parseMeta(router, tag);
 
@@ -84,9 +90,9 @@ const SiteLayout = (props: Props): JSX.Element => {
         {renderMeta(settings, meta)}
       </Head>
 
-      <div className={classNames('pt-4 sm:pt-6 xl:pt-10 min-h-screen flex flex-col justify-between', getWrapperStyles())}>
+      <div className={'container mx-auto lg:mx-0 px-2 lg:px-4 xl:pl-8 xl:pr-32 pt-4 sm:pt-6 xl:pt-10 min-h-screen flex flex-col justify-between'}>
         <Header {...meta} {...settings} />
-        <main className="flex-grow">
+        <main className={classNames('flex-grow', { flex: flexMain })}>
           { children }
         </main>
 

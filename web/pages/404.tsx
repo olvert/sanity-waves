@@ -13,7 +13,7 @@ const Custom404 = (props: Props): JSX.Element => {
   const { settings } = props;
 
   return (
-    <SiteLayout settings={settings}>
+    <SiteLayout settings={settings} flexMain={true}>
       <PageMessage message={'404. This page could not be found.'} />
     </SiteLayout>
   );

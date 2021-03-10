@@ -16,7 +16,7 @@ const Error = (props: Props): JSX.Element => {
   const { statusCode, settings } = props;
 
   return (
-    <SiteLayout settings={settings}>
+    <SiteLayout settings={settings} flexMain={true}>
       <PageMessage message={formatMessage(statusCode)} />
     </SiteLayout>
   );

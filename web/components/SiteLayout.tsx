@@ -84,9 +84,9 @@ const SiteLayout = (props: Props): JSX.Element => {
         {renderMeta(settings, meta)}
       </Head>
 
-      <div className={classNames('min-h-screen flex flex-col justify-between', getWrapperStyles())}>
-        <main className="pt-4 sm:pt-6 xl:pt-10">
-          <Header {...meta} {...settings} />
+      <div className={classNames('pt-4 sm:pt-6 xl:pt-10 min-h-screen flex flex-col justify-between', getWrapperStyles())}>
+        <Header {...meta} {...settings} />
+        <main className="flex-grow">
           { children }
         </main>
 

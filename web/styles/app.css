@@ -12,12 +12,6 @@
     font-style: normal;
     font-display: swap;
   }
-
-  html {
-    @apply h-full bg-white font-apfel-grotezk text-blackish text-left;
-  
-    -webkit-font-smoothing: antialiased;
-  }
   
   a,
   a:focus,

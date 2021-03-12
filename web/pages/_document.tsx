@@ -12,7 +12,7 @@ import Document, {
 class CustomizedDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" className="h-full bg-white font-apfel-grotezk text-blackish text-left antialiased">
         <Head />
         <body>
           <Main />

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base overrides */
+@layer base {
+  @font-face {
+    font-family: 'ApfelGrotezk';
+    src:
+      url('/fonts/ApfelGrotezk-Regular.woff2') format('woff2'),
+      url('/fonts/ApfelGrotezk-Regular.woff') format('woff');
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html {
+    @apply h-full bg-white font-apfel-grotezk text-blackish text-left;
+  
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  a,
+  a:focus,
+  a:hover {
+    @apply text-blackish no-underline;
+  }
+  
+  p {
+    @apply m-0;
+  } 
+}
+
+/* Custom utilities */
+@layer utilities {
+  @variants responsive {
+    .cols-2 {
+      columns: 2;
+    }
+    .cols-3 {
+      columns: 3;
+    }
+  }
+}

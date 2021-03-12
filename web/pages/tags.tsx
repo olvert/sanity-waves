@@ -17,7 +17,7 @@ const TagsPage = (props: Props): JSX.Element => {
 
   return (
     <SiteLayout settings={settings}>
-      <div className="wvs-tags mb-10">
+      <div className="cols-2 lg:cols-3 mb-10">
         { tags.map((t) => (
           <div key={t.slug.current}>
             <Link href={getTagPageHref(t.slug.current)}>

@@ -219,6 +219,11 @@
   resolved "https://registry.yarnpkg.com/@sanity/timed-out/-/timed-out-4.0.2.tgz#c9f61f9a1609baa1eb3e4235a24ea2a775022cdf"
   integrity sha512-NBDKGj14g9Z+bopIvZcQKWCzJq5JSrdmzRR1CS+iyA3Gm8SnIWBfZa7I3mTg2X6Nu8LQXG0EPKXdOGozLS4i3w==
 
+"@tailwindcss/aspect-ratio@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/aspect-ratio/-/aspect-ratio-0.2.0.tgz#bebd32b7d0756b695294d4db1ae658796ff72a2c"
+  integrity sha512-v5LyHkwXj/4lI74B06zUrmWEdmSqS43+jw717pkt3fAXqb7ALwu77A8t7j+Bej+ZbdlIIqNMYheGN7wSGV1A6w==
+
 "@types/aos@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/aos/-/aos-3.0.3.tgz#078bfd1cab215e168ac6a5fafc5ade71decc2ed0"

@@ -42,7 +42,7 @@ const VideoContent = (props: Video): JSX.Element => {
   const activate = () => setActive(true);
 
   return (
-    <div className="aspect-ratio ar-16-9 bg-black cursor-pointer">
+    <div className="aspect-w-16 aspect-h-9 bg-black cursor-pointer">
       { isActive
         ? renderIFrame(videoId)
         : renderThumbnail(videoId, activate)

@@ -1,8 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
+
 module.exports = {
-  future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
-  },
+  future: {},
   purge: [
     './components/*.tsx',
     './pages/*.tsx',
@@ -46,5 +46,7 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
